@@ -1,0 +1,120 @@
+{
+    "author": "Steven Olmsted <steven.olmsted@ibigroup.com>",
+    "babel": {
+        "env": {
+            "build": {
+                "presets": [
+                    "minify"
+                ]
+            }
+        },
+        "plugins": [
+            "syntax-object-rest-spread",
+            "transform-line",
+            "transform-object-rest-spread"
+        ],
+        "presets": [
+            [
+                "env",
+                {
+                    "targets": {
+                        "node": "current"
+                    }
+                }
+            ]
+        ],
+        "sourceMaps": "inline"
+    },
+    "bugs": "https://github.com/ibi-group/eslint-plugin-isotropic/issues",
+    "contributors": [
+        "Duane Sibilly <duane.sibilly@ibigroup.com>"
+    ],
+    "dependencies": {
+        "babel-runtime": "~6.26.0",
+        "eslint": "~4.6.1",
+        "eslint-config-isotropic": "~0.5.0",
+        "eslint-plugin-eslint-comments": "~1.0.3",
+        "isotropic-natural-sort": "~0.0.0"
+    },
+    "description": "ESLint rules for Isotropic",
+    "devDependencies": {
+        "babel-cli": "~6.26.0",
+        "babel-istanbul": "~0.12.2",
+        "babel-plugin-syntax-object-rest-spread": "~6.13.0",
+        "babel-plugin-transform-line": "~0.3.0",
+        "babel-plugin-transform-object-rest-spread": "~6.26.0",
+        "babel-preset-env": "~1.6.0",
+        "babel-preset-minify": "~0.2.0",
+        "chai": "~4.1.2",
+        "eslint-find-rules": "~3.1.1",
+        "eslint-plugin-eslint-plugin": "~1.2.0",
+        "eslint-plugin-self": "~1.0.1",
+        "mocha": "~3.5.1",
+        "nsp": "~2.8.0"
+    },
+    "engines": {
+        "node": "^8.4.0",
+        "npm": "^5.4.1"
+    },
+    "eslintConfig": {
+        "env": {
+            "es6": true
+        },
+        "extends": "plugin:self/isotropic",
+        "parserOptions": {
+            "ecmaFeatures": {
+                "experimentalObjectRestSpread": true,
+                "globalReturn": false,
+                "impliedStrict": true,
+                "jsx": false
+            },
+            "ecmaVersion": 2017,
+            "sourceType": "module"
+        },
+        "plugins": [
+            "eslint-plugin",
+            "self"
+        ],
+        "root": true,
+        "rules": {
+            "eslint-plugin/consistent-output": "error",
+            "eslint-plugin/fixer-return": "error",
+            "eslint-plugin/no-deprecated-context-methods": "error",
+            "eslint-plugin/no-deprecated-report-api": "error",
+            "eslint-plugin/no-identical-tests": "error",
+            "eslint-plugin/no-missing-placeholders": "error",
+            "eslint-plugin/no-unused-placeholders": "error",
+            "eslint-plugin/no-useless-token-range": "error",
+            "eslint-plugin/prefer-output-null": "error",
+            "eslint-plugin/prefer-placeholders": "error",
+            "eslint-plugin/report-message-format": "off",
+            "eslint-plugin/require-meta-fixable": "error",
+            "eslint-plugin/test-case-property-ordering": "off",
+            "eslint-plugin/test-case-shorthand-strings": [
+                "error",
+                "never"
+            ]
+        }
+    },
+    "keywords": [
+        "eslint",
+        "eslintplugin",
+        "eslint-plugin"
+    ],
+    "homepage": "https://github.com/ibi-group/eslint-plugin-isotropic",
+    "license": "BSD-3-Clause",
+    "main": "lib/eslint-plugin-isotropic.js",
+    "name": "eslint-plugin-isotropic",
+    "repository": "ibi-group/eslint-plugin-isotropic",
+    "scripts": {
+        "build": "BABEL_ENV=build babel js -d lib",
+        "lint": "npm run build && eslint-find-rules -u package.json && eslint js test",
+        "posttest": "[ -z \"$npm_config_coverage\" ] || babel-istanbul check-coverage --branches 100 --functions 100 --lines 100 --statements 100",
+        "prepare": "npm run build",
+        "prepublishOnly": "npm run securityCheck && npm test --coverage",
+        "pretest": "npm run lint",
+        "securityCheck": "nsp check",
+        "test": "babel-node ./node_modules/.bin/babel-istanbul test _mocha"
+    },
+    "version": "0.0.0"
+}
