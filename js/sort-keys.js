@@ -47,7 +47,7 @@ export default {
                     direction,
                     ignoreSpecialCharacters,
                     prefixPositions
-                })(previousPropertyName, propertyName) !== -1) {
+                })(previousPropertyName, propertyName) > 0) {
                     context.report({
                         data: {
                             previousPropertyName,
