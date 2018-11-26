@@ -1,4 +1,4 @@
-import _astUtils from 'eslint/lib/ast-utils.js';
+import _astUtils from 'eslint/lib/util/ast-utils.js';
 import _naturalSort from 'isotropic-natural-sort';
 
 export default {

@@ -4,18 +4,21 @@
         "env": {
             "build": {
                 "presets": [
-                    "minify"
+                    "babel-preset-minify"
+                ]
+            },
+            "test": {
+                "plugins": [
+                    "babel-plugin-istanbul"
                 ]
             }
         },
         "plugins": [
-            "syntax-object-rest-spread",
-            "transform-line",
-            "transform-object-rest-spread"
+            "babel-plugin-transform-line"
         ],
         "presets": [
             [
-                "env",
+                "@babel/preset-env",
                 {
                     "targets": {
                         "node": "current"
@@ -30,31 +33,32 @@
         "Duane Sibilly <duane.sibilly@ibigroup.com>"
     ],
     "dependencies": {
-        "babel-runtime": "~6.26.0",
-        "eslint": "~4.6.1",
-        "eslint-config-isotropic": "~0.6.0",
-        "eslint-plugin-eslint-comments": "~1.0.3",
-        "isotropic-natural-sort": "~0.1.0"
+        "@babel/runtime": "~7.1.5",
+        "eslint": "~5.9.0",
+        "eslint-config-isotropic": "~0.7.0",
+        "eslint-plugin-eslint-comments": "~3.0.1",
+        "isotropic-natural-sort": "~0.2.0"
     },
     "description": "ESLint rules for Isotropic",
     "devDependencies": {
-        "babel-cli": "~6.26.0",
-        "babel-istanbul": "~0.12.2",
-        "babel-plugin-syntax-object-rest-spread": "~6.13.0",
-        "babel-plugin-transform-line": "~0.4.0",
-        "babel-plugin-transform-object-rest-spread": "~6.26.0",
-        "babel-preset-env": "~1.6.0",
-        "babel-preset-minify": "~0.2.0",
-        "chai": "~4.1.2",
-        "eslint-find-rules": "~3.1.1",
-        "eslint-plugin-eslint-plugin": "~1.2.0",
-        "eslint-plugin-self": "~1.0.1",
-        "mocha": "~3.5.1",
-        "nsp": "~2.8.0"
+        "@babel/cli": "~7.1.5",
+        "@babel/core": "~7.1.6",
+        "babel-plugin-istanbul": "~5.1.0",
+        "babel-plugin-transform-line": "~0.5.0",
+        "@babel/preset-env": "~7.1.6",
+        "babel-preset-minify": "~0.5.0",
+        "@babel/register": "~7.0.0",
+        "chai": "~4.2.0",
+        "cross-env": "~5.2.0",
+        "eslint-find-rules": "~3.3.1",
+        "eslint-plugin-eslint-plugin": "~1.4.1",
+        "eslint-plugin-self": "~1.1.0",
+        "mocha": "~5.2.0",
+        "nyc": "~13.1.0"
     },
     "engines": {
-        "node": "^8.4.0",
-        "npm": "^5.4.1"
+        "node": "^10.13.0",
+        "npm": "^6.4.1"
     },
     "eslintConfig": {
         "env": {
@@ -63,12 +67,11 @@
         "extends": "plugin:self/isotropic",
         "parserOptions": {
             "ecmaFeatures": {
-                "experimentalObjectRestSpread": true,
                 "globalReturn": false,
                 "impliedStrict": true,
                 "jsx": false
             },
-            "ecmaVersion": 2017,
+            "ecmaVersion": 2018,
             "sourceType": "module"
         },
         "plugins": [
@@ -87,7 +90,9 @@
             "eslint-plugin/no-useless-token-range": "error",
             "eslint-plugin/prefer-output-null": "error",
             "eslint-plugin/prefer-placeholders": "error",
+            "eslint-plugin/prefer-replace-text": "error",
             "eslint-plugin/report-message-format": "off",
+            "eslint-plugin/require-meta-docs-url": "error",
             "eslint-plugin/require-meta-fixable": "error",
             "eslint-plugin/test-case-property-ordering": "off",
             "eslint-plugin/test-case-shorthand-strings": [
@@ -105,16 +110,32 @@
     "license": "BSD-3-Clause",
     "main": "lib/eslint-plugin-isotropic.js",
     "name": "eslint-plugin-isotropic",
+    "nyc": {
+        "branches": 100,
+        "check-coverage": false,
+        "functions": 100,
+        "instrument": false,
+        "lines": 100,
+        "per-file": false,
+        "reporter": [
+            "lcov",
+            "text-summary"
+        ],
+        "require": [
+            "@babel/register"
+        ],
+        "sourceMap": false,
+        "statements": 100
+    },
     "repository": "ibi-group/eslint-plugin-isotropic",
     "scripts": {
-        "build": "BABEL_ENV=build babel js -d lib",
-        "lint": "npm run build && eslint-find-rules -u package.json && eslint js test",
-        "posttest": "[ -z \"$npm_config_coverage\" ] || babel-istanbul check-coverage --branches 100 --functions 100 --lines 100 --statements 100",
+        "build": "cross-env BABEL_ENV=build babel js -d lib",
+        "lint": "npm run build > /dev/null && eslint-find-rules -u package.json && eslint js test",
+        "posttest": "[ -z \"$npm_config_coverage\" ] || nyc check-coverage",
         "prepare": "npm run build",
-        "prepublishOnly": "npm run securityCheck && npm test --coverage",
+        "prepublishOnly": "npm test --coverage",
         "pretest": "npm run lint",
-        "securityCheck": "nsp check",
-        "test": "babel-node ./node_modules/.bin/babel-istanbul test _mocha"
+        "test": "cross-env BABEL_ENV=test nyc mocha"
     },
-    "version": "0.1.0"
+    "version": "0.2.0"
 }
