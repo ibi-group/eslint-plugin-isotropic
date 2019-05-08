@@ -35,9 +35,9 @@
     "dependencies": {
         "@babel/runtime": "~7.4.4",
         "eslint": "~5.16.0",
-        "eslint-config-isotropic": "~0.8.0",
+        "eslint-config-isotropic": "~0.9.0",
         "eslint-plugin-eslint-comments": "~3.1.1",
-        "isotropic-natural-sort": "~0.3.0"
+        "isotropic-natural-sort": "~0.4.0"
     },
     "description": "ESLint rules for Isotropic",
     "devDependencies": {
@@ -138,5 +138,5 @@
         "pretest": "npm run lint",
         "test": "cross-env BABEL_ENV=test nyc mocha"
     },
-    "version": "0.3.0"
+    "version": "0.4.0"
 }
