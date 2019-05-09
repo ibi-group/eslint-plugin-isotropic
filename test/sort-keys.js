@@ -28,7 +28,7 @@ _mocha.describe('sortKeys', () => {
                     type: 'Property'
                 }],
                 parserOptions: {
-                    ecmaVersion: 2017
+                    ecmaVersion: 2018
                 }
             }, {
                 code: `
@@ -46,7 +46,7 @@ _mocha.describe('sortKeys', () => {
                     type: 'Property'
                 }],
                 parserOptions: {
-                    ecmaVersion: 2017
+                    ecmaVersion: 2018
                 }
             }, {
                 code: `
@@ -67,7 +67,7 @@ _mocha.describe('sortKeys', () => {
                     direction: 'desc'
                 }],
                 parserOptions: {
-                    ecmaVersion: 2017
+                    ecmaVersion: 2018
                 }
             }, {
                 code: `
@@ -85,7 +85,7 @@ _mocha.describe('sortKeys', () => {
                     caseSensitive: true
                 }],
                 parserOptions: {
-                    ecmaVersion: 2017
+                    ecmaVersion: 2018
                 }
             }, {
                 code: `
@@ -108,7 +108,7 @@ _mocha.describe('sortKeys', () => {
                     type: 'Property'
                 }],
                 parserOptions: {
-                    ecmaVersion: 2017
+                    ecmaVersion: 2018
                 }
             }, {
                 code: `
@@ -134,7 +134,7 @@ _mocha.describe('sortKeys', () => {
                     ignoreSpecialCharacters: false
                 }],
                 parserOptions: {
-                    ecmaVersion: 2017
+                    ecmaVersion: 2018
                 }
             }, {
                 code: `
@@ -153,7 +153,7 @@ _mocha.describe('sortKeys', () => {
                     type: 'Property'
                 }],
                 parserOptions: {
-                    ecmaVersion: 2017
+                    ecmaVersion: 2018
                 }
             }, {
                 code: `
@@ -172,10 +172,7 @@ _mocha.describe('sortKeys', () => {
                     type: 'Property'
                 }],
                 parserOptions: {
-                    ecmaFeatures: {
-                        experimentalObjectRestSpread: true
-                    },
-                    ecmaVersion: 2017
+                    ecmaVersion: 2018
                 }
             }, {
                 code: `
@@ -193,7 +190,7 @@ _mocha.describe('sortKeys', () => {
                     type: 'Property'
                 }],
                 parserOptions: {
-                    ecmaVersion: 2017
+                    ecmaVersion: 2018
                 }
             }],
             valid: [{
@@ -205,7 +202,7 @@ _mocha.describe('sortKeys', () => {
                     };
                 `,
                 parserOptions: {
-                    ecmaVersion: 2017
+                    ecmaVersion: 2018
                 }
             }, {
                 code: `
@@ -219,7 +216,7 @@ _mocha.describe('sortKeys', () => {
                     };
                 `,
                 parserOptions: {
-                    ecmaVersion: 2017
+                    ecmaVersion: 2018
                 }
             }, {
                 code: `
@@ -233,7 +230,7 @@ _mocha.describe('sortKeys', () => {
                     direction: 'desc'
                 }],
                 parserOptions: {
-                    ecmaVersion: 2017
+                    ecmaVersion: 2018
                 }
             }, {
                 code: `
@@ -247,7 +244,7 @@ _mocha.describe('sortKeys', () => {
                     caseSensitive: true
                 }],
                 parserOptions: {
-                    ecmaVersion: 2017
+                    ecmaVersion: 2018
                 }
             }, {
                 code: `
@@ -260,7 +257,7 @@ _mocha.describe('sortKeys', () => {
                     };
                 `,
                 parserOptions: {
-                    ecmaVersion: 2017
+                    ecmaVersion: 2018
                 }
             }, {
                 code: `
@@ -276,7 +273,7 @@ _mocha.describe('sortKeys', () => {
                     ignoreSpecialCharacters: false
                 }],
                 parserOptions: {
-                    ecmaVersion: 2017
+                    ecmaVersion: 2018
                 }
             }, {
                 code: `
@@ -288,7 +285,7 @@ _mocha.describe('sortKeys', () => {
                     };
                 `,
                 parserOptions: {
-                    ecmaVersion: 2017
+                    ecmaVersion: 2018
                 }
             }, {
                 code: `
@@ -300,10 +297,7 @@ _mocha.describe('sortKeys', () => {
                     };
                 `,
                 parserOptions: {
-                    ecmaFeatures: {
-                        experimentalObjectRestSpread: true
-                    },
-                    ecmaVersion: 2017
+                    ecmaVersion: 2018
                 }
             }, {
                 code: `
@@ -313,7 +307,7 @@ _mocha.describe('sortKeys', () => {
                     } = {};
                 `,
                 parserOptions: {
-                    ecmaVersion: 2017
+                    ecmaVersion: 2018
                 }
             }]
         });
