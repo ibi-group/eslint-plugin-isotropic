@@ -1,5 +1,6 @@
 import * as _eslintConfigIsotropic from 'eslint-config-isotropic';
 import * as _eslintPluginEslintComments from 'eslint-plugin-eslint-comments';
+import _preferReflectApply from './prefer-reflect-apply.js';
 import _sortKeys from './sort-keys.js';
 
 const configs = {
@@ -9,6 +10,7 @@ const configs = {
     },
     rules = {
         ..._eslintPluginEslintComments.rules,
+        'prefer-reflect-apply': _preferReflectApply,
         'sort-keys': _sortKeys
     };
 
@@ -22,6 +24,7 @@ configs.isotropic.rules = {
     'isotropic/no-unused-disable': 'error',
     'isotropic/no-unused-enable': 'error',
     'isotropic/no-use': 'warn',
+    'isotropic/prefer-reflect-apply': 'error',
     'isotropic/sort-keys': [
         'error',
         {
