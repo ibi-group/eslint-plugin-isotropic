@@ -22,13 +22,13 @@ _mocha.describe('sortKeys', () => {
                 `,
                 errors: [{
                     message: 'Expected object keys to be in order. \'b\' should be before \'c\'.',
-                    type: 'Property'
+                    type: 'Identifier'
                 }, {
                     message: 'Expected object keys to be in order. \'a\' should be before \'b\'.',
-                    type: 'Property'
+                    type: 'Identifier'
                 }],
                 parserOptions: {
-                    ecmaVersion: 2017
+                    ecmaVersion: 2018
                 }
             }, {
                 code: `
@@ -43,10 +43,10 @@ _mocha.describe('sortKeys', () => {
                 `,
                 errors: [{
                     message: 'Expected object keys to be in order. \'x\' should be before \'_c\'.',
-                    type: 'Property'
+                    type: 'Identifier'
                 }],
                 parserOptions: {
-                    ecmaVersion: 2017
+                    ecmaVersion: 2018
                 }
             }, {
                 code: `
@@ -58,16 +58,16 @@ _mocha.describe('sortKeys', () => {
                 `,
                 errors: [{
                     message: 'Expected object keys to be in order. \'b\' should be before \'a\'.',
-                    type: 'Property'
+                    type: 'Identifier'
                 }, {
                     message: 'Expected object keys to be in order. \'c\' should be before \'b\'.',
-                    type: 'Property'
+                    type: 'Identifier'
                 }],
                 options: [{
                     direction: 'desc'
                 }],
                 parserOptions: {
-                    ecmaVersion: 2017
+                    ecmaVersion: 2018
                 }
             }, {
                 code: `
@@ -79,13 +79,13 @@ _mocha.describe('sortKeys', () => {
                 `,
                 errors: [{
                     message: 'Expected object keys to be in order. \'B\' should be before \'a\'.',
-                    type: 'Property'
+                    type: 'Identifier'
                 }],
                 options: [{
                     caseSensitive: true
                 }],
                 parserOptions: {
-                    ecmaVersion: 2017
+                    ecmaVersion: 2018
                 }
             }, {
                 code: `
@@ -99,16 +99,16 @@ _mocha.describe('sortKeys', () => {
                 `,
                 errors: [{
                     message: 'Expected object keys to be in order. \'aeioǜ_d\' should be before \'aeiou_e\'.',
-                    type: 'Property'
+                    type: 'Literal'
                 }, {
                     message: 'Expected object keys to be in order. \'aęiou_b\' should be before \'aeioǜ_d\'.',
-                    type: 'Property'
+                    type: 'Literal'
                 }, {
                     message: 'Expected object keys to be in order. \'áeiou_a\' should be before \'aęiou_b\'.',
-                    type: 'Property'
+                    type: 'Literal'
                 }],
                 parserOptions: {
-                    ecmaVersion: 2017
+                    ecmaVersion: 2018
                 }
             }, {
                 code: `
@@ -122,19 +122,19 @@ _mocha.describe('sortKeys', () => {
                 `,
                 errors: [{
                     message: 'Expected object keys to be in order. \'aęiou_b\' should be before \'áeiou_a\'.',
-                    type: 'Property'
+                    type: 'Literal'
                 }, {
                     message: 'Expected object keys to be in order. \'aeioǜ_d\' should be before \'æiou_c\'.',
-                    type: 'Property'
+                    type: 'Literal'
                 }, {
                     message: 'Expected object keys to be in order. \'aeiou_e\' should be before \'aeioǜ_d\'.',
-                    type: 'Property'
+                    type: 'Literal'
                 }],
                 options: [{
                     ignoreSpecialCharacters: false
                 }],
                 parserOptions: {
-                    ecmaVersion: 2017
+                    ecmaVersion: 2018
                 }
             }, {
                 code: `
@@ -147,13 +147,13 @@ _mocha.describe('sortKeys', () => {
                 `,
                 errors: [{
                     message: 'Expected object keys to be in order. \'b\' should be before \'c\'.',
-                    type: 'Property'
+                    type: 'Identifier'
                 }, {
                     message: 'Expected object keys to be in order. \'a\' should be before \'b\'.',
-                    type: 'Property'
+                    type: 'Identifier'
                 }],
                 parserOptions: {
-                    ecmaVersion: 2017
+                    ecmaVersion: 2018
                 }
             }, {
                 code: `
@@ -166,16 +166,13 @@ _mocha.describe('sortKeys', () => {
                 `,
                 errors: [{
                     message: 'Expected object keys to be in order. \'b\' should be before \'c\'.',
-                    type: 'Property'
+                    type: 'Identifier'
                 }, {
                     message: 'Expected object keys to be in order. \'a\' should be before \'b\'.',
-                    type: 'Property'
+                    type: 'Identifier'
                 }],
                 parserOptions: {
-                    ecmaFeatures: {
-                        experimentalObjectRestSpread: true
-                    },
-                    ecmaVersion: 2017
+                    ecmaVersion: 2018
                 }
             }, {
                 code: `
@@ -187,13 +184,13 @@ _mocha.describe('sortKeys', () => {
                 `,
                 errors: [{
                     message: 'Expected object keys to be in order. \'b\' should be before \'c\'.',
-                    type: 'Property'
+                    type: 'Identifier'
                 }, {
                     message: 'Expected object keys to be in order. \'a\' should be before \'b\'.',
-                    type: 'Property'
+                    type: 'Identifier'
                 }],
                 parserOptions: {
-                    ecmaVersion: 2017
+                    ecmaVersion: 2018
                 }
             }],
             valid: [{
@@ -205,7 +202,7 @@ _mocha.describe('sortKeys', () => {
                     };
                 `,
                 parserOptions: {
-                    ecmaVersion: 2017
+                    ecmaVersion: 2018
                 }
             }, {
                 code: `
@@ -219,7 +216,7 @@ _mocha.describe('sortKeys', () => {
                     };
                 `,
                 parserOptions: {
-                    ecmaVersion: 2017
+                    ecmaVersion: 2018
                 }
             }, {
                 code: `
@@ -233,7 +230,7 @@ _mocha.describe('sortKeys', () => {
                     direction: 'desc'
                 }],
                 parserOptions: {
-                    ecmaVersion: 2017
+                    ecmaVersion: 2018
                 }
             }, {
                 code: `
@@ -247,7 +244,7 @@ _mocha.describe('sortKeys', () => {
                     caseSensitive: true
                 }],
                 parserOptions: {
-                    ecmaVersion: 2017
+                    ecmaVersion: 2018
                 }
             }, {
                 code: `
@@ -260,7 +257,7 @@ _mocha.describe('sortKeys', () => {
                     };
                 `,
                 parserOptions: {
-                    ecmaVersion: 2017
+                    ecmaVersion: 2018
                 }
             }, {
                 code: `
@@ -276,7 +273,7 @@ _mocha.describe('sortKeys', () => {
                     ignoreSpecialCharacters: false
                 }],
                 parserOptions: {
-                    ecmaVersion: 2017
+                    ecmaVersion: 2018
                 }
             }, {
                 code: `
@@ -288,7 +285,19 @@ _mocha.describe('sortKeys', () => {
                     };
                 `,
                 parserOptions: {
-                    ecmaVersion: 2017
+                    ecmaVersion: 2018
+                }
+            }, {
+                code: `
+                    const object = {
+                        a: 1,
+                        b: 2,
+                        [\`\${a}\`]: 3,
+                        [\`c\`]: 4
+                    };
+                `,
+                parserOptions: {
+                    ecmaVersion: 2018
                 }
             }, {
                 code: `
@@ -300,10 +309,7 @@ _mocha.describe('sortKeys', () => {
                     };
                 `,
                 parserOptions: {
-                    ecmaFeatures: {
-                        experimentalObjectRestSpread: true
-                    },
-                    ecmaVersion: 2017
+                    ecmaVersion: 2018
                 }
             }, {
                 code: `
@@ -313,7 +319,7 @@ _mocha.describe('sortKeys', () => {
                     } = {};
                 `,
                 parserOptions: {
-                    ecmaVersion: 2017
+                    ecmaVersion: 2018
                 }
             }]
         });

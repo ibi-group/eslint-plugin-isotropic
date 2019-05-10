@@ -1,63 +1,45 @@
-import _astUtils from 'eslint/lib/util/ast-utils.js';
+import _getPropertyName from './get-property-name.js';
 import _naturalSort from 'isotropic-natural-sort';
 
 export default {
     create: context => {
         const [{
-            caseSensitive = false,
-            direction = 'asc',
-            ignoreSpecialCharacters = true,
-            prefixPositions = {
-                _: 'last'
-            }
-        } = {}] = context.options;
-
-        let object = null;
+                caseSensitive = false,
+                direction = 'asc',
+                ignoreSpecialCharacters = true,
+                prefixPositions = {
+                    _: 'last'
+                }
+            } = {}] = context.options,
+            naturalSort = _naturalSort({
+                caseSensitive,
+                direction,
+                ignoreSpecialCharacters,
+                prefixPositions
+            });
 
         return {
-            ObjectExpression () {
-                object = {
-                    parentObject: object,
-                    previousPropertyName: null
-                };
-            },
-            'ObjectExpression:exit' () {
-                object = object.parentObject;
-            },
-            Property (node) {
-                if (node.parent.type === 'ObjectPattern') {
-                    return;
-                }
+            ObjectExpression (node) {
+                node.properties.reduce((previousPropertyName, property) => {
+                    const propertyName = _getPropertyName(property);
 
-                const previousPropertyName = object.previousPropertyName,
-                    propertyName = _astUtils.getStaticPropertyName(node) || node.key.name || null;
+                    if (!propertyName) {
+                        return previousPropertyName;
+                    }
 
-                if (propertyName) {
-                    object.previousPropertyName = propertyName;
-                } else {
-                    return;
-                }
+                    if (previousPropertyName && naturalSort(previousPropertyName, propertyName) > 0) {
+                        context.report({
+                            data: {
+                                previousPropertyName,
+                                propertyName
+                            },
+                            message: 'Expected object keys to be in order. \'{{propertyName}}\' should be before \'{{previousPropertyName}}\'.',
+                            node: property.key
+                        });
+                    }
 
-                if (!previousPropertyName) {
-                    return;
-                }
-
-                if (_naturalSort({
-                    caseSensitive,
-                    direction,
-                    ignoreSpecialCharacters,
-                    prefixPositions
-                })(previousPropertyName, propertyName) > 0) {
-                    context.report({
-                        data: {
-                            previousPropertyName,
-                            propertyName
-                        },
-                        loc: node.key.loc,
-                        message: 'Expected object keys to be in order. \'{{propertyName}}\' should be before \'{{previousPropertyName}}\'.',
-                        node
-                    });
-                }
+                    return propertyName;
+                }, null);
             }
         };
     },
@@ -68,29 +50,27 @@ export default {
             recommended: true
         },
         fixable: null,
-        schema: [
-            {
-                additionalProperties: false,
-                properties: {
-                    caseSensitive: {
-                        type: 'boolean'
-                    },
-                    direction: {
-                        enum: [
-                            'asc',
-                            'desc'
-                        ],
-                        type: 'string'
-                    },
-                    ignoreSpecialCharacters: {
-                        type: 'boolean'
-                    },
-                    prefixPositions: {
-                        type: 'object'
-                    }
+        schema: [{
+            additionalProperties: false,
+            properties: {
+                caseSensitive: {
+                    type: 'boolean'
                 },
-                type: 'object'
-            }
-        ]
+                direction: {
+                    enum: [
+                        'asc',
+                        'desc'
+                    ],
+                    type: 'string'
+                },
+                ignoreSpecialCharacters: {
+                    type: 'boolean'
+                },
+                prefixPositions: {
+                    type: 'object'
+                }
+            },
+            type: 'object'
+        }]
     }
 };

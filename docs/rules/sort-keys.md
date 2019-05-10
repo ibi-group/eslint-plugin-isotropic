@@ -18,7 +18,7 @@ const object = {
     a: 1
 };
 
-// This rule checks computer properties which have a simple name as well
+// This rule checks computed properties which have a simple name as well
 const object = {
     c: 3,
     [b]: 2,
