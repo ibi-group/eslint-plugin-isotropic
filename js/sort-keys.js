@@ -1,63 +1,59 @@
-import _astUtils from 'eslint/lib/util/ast-utils.js';
 import _naturalSort from 'isotropic-natural-sort';
 
 export default {
     create: context => {
         const [{
-            caseSensitive = false,
-            direction = 'asc',
-            ignoreSpecialCharacters = true,
-            prefixPositions = {
-                _: 'last'
-            }
-        } = {}] = context.options;
-
-        let object = null;
+                caseSensitive = false,
+                direction = 'asc',
+                ignoreSpecialCharacters = true,
+                prefixPositions = {
+                    _: 'last'
+                }
+            } = {}] = context.options,
+            naturalSort = _naturalSort({
+                caseSensitive,
+                direction,
+                ignoreSpecialCharacters,
+                prefixPositions
+            });
 
         return {
-            ObjectExpression () {
-                object = {
-                    parentObject: object,
-                    previousPropertyName: null
-                };
-            },
-            'ObjectExpression:exit' () {
-                object = object.parentObject;
-            },
-            Property (node) {
-                if (node.parent.type === 'ObjectPattern') {
-                    return;
-                }
+            ObjectExpression (node) {
+                node.properties.reduce((previousPropertyName, property) => {
+                    let propertyName;
 
-                const previousPropertyName = object.previousPropertyName,
-                    propertyName = _astUtils.getStaticPropertyName(node) || node.key.name || null;
+                    switch (property.key && property.key.type) {
+                        case 'Identifier':
+                            propertyName = property.key.name;
+                            break;
+                        case 'Literal':
+                            propertyName = `${property.key.value}`;
+                            break;
+                        case 'TemplateLiteral':
+                            if (!property.key.expressions.length && property.key.quasis.length === 1) {
+                                propertyName = property.key.quasis[0].value.cooked;
+                            }
 
-                if (propertyName) {
-                    object.previousPropertyName = propertyName;
-                } else {
-                    return;
-                }
+                            break;
+                    }
 
-                if (!previousPropertyName) {
-                    return;
-                }
+                    if (!propertyName) {
+                        return previousPropertyName;
+                    }
 
-                if (_naturalSort({
-                    caseSensitive,
-                    direction,
-                    ignoreSpecialCharacters,
-                    prefixPositions
-                })(previousPropertyName, propertyName) > 0) {
-                    context.report({
-                        data: {
-                            previousPropertyName,
-                            propertyName
-                        },
-                        loc: node.key.loc,
-                        message: 'Expected object keys to be in order. \'{{propertyName}}\' should be before \'{{previousPropertyName}}\'.',
-                        node
-                    });
-                }
+                    if (previousPropertyName && naturalSort(previousPropertyName, propertyName) > 0) {
+                        context.report({
+                            data: {
+                                previousPropertyName,
+                                propertyName
+                            },
+                            message: 'Expected object keys to be in order. \'{{propertyName}}\' should be before \'{{previousPropertyName}}\'.',
+                            node: property.key
+                        });
+                    }
+
+                    return propertyName;
+                }, null);
             }
         };
     },
