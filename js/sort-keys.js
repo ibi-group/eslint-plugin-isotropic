@@ -1,3 +1,4 @@
+import _getPropertyName from './get-property-name.js';
 import _naturalSort from 'isotropic-natural-sort';
 
 export default {
@@ -20,22 +21,7 @@ export default {
         return {
             ObjectExpression (node) {
                 node.properties.reduce((previousPropertyName, property) => {
-                    let propertyName;
-
-                    switch (property.key && property.key.type) {
-                        case 'Identifier':
-                            propertyName = property.key.name;
-                            break;
-                        case 'Literal':
-                            propertyName = `${property.key.value}`;
-                            break;
-                        case 'TemplateLiteral':
-                            if (!property.key.expressions.length && property.key.quasis.length === 1) {
-                                propertyName = property.key.quasis[0].value.cooked;
-                            }
-
-                            break;
-                    }
+                    const propertyName = _getPropertyName(property);
 
                     if (!propertyName) {
                         return previousPropertyName;
