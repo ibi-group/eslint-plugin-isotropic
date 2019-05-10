@@ -133,32 +133,30 @@ export default {
             recommended: true
         },
         fixable: null,
-        schema: [
-            {
-                additionalProperties: false,
-                properties: {
-                    caseSensitive: {
-                        type: 'boolean'
-                    },
-                    direction: {
-                        enum: [
-                            'asc',
-                            'desc'
-                        ],
-                        type: 'string'
-                    },
-                    ignoreSpecialCharacters: {
-                        type: 'boolean'
-                    },
-                    prefixPositions: {
-                        type: 'object'
-                    },
-                    strictEmptyLines: {
-                        type: 'boolean'
-                    }
+        schema: [{
+            additionalProperties: false,
+            properties: {
+                caseSensitive: {
+                    type: 'boolean'
                 },
-                type: 'object'
-            }
-        ]
+                direction: {
+                    enum: [
+                        'asc',
+                        'desc'
+                    ],
+                    type: 'string'
+                },
+                ignoreSpecialCharacters: {
+                    type: 'boolean'
+                },
+                prefixPositions: {
+                    type: 'object'
+                },
+                strictEmptyLines: {
+                    type: 'boolean'
+                }
+            },
+            type: 'object'
+        }]
     }
 };
