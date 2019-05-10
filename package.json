@@ -54,7 +54,7 @@
         "eslint-plugin-eslint-plugin": "~2.1.0",
         "eslint-plugin-self": "~1.2.0",
         "mocha": "~6.1.4",
-        "nyc": "~14.1.0"
+        "nyc": "~14.1.1"
     },
     "engines": {
         "node": "^10.15.3",
@@ -103,13 +103,15 @@
             ]
         }
     },
+    "homepage": "https://github.com/ibi-group/eslint-plugin-isotropic",
     "keywords": [
         "eslint",
-        "eslintplugin",
+        "eslint plugin",
         "eslint-plugin",
-        "isotropic"
+        "eslintplugin",
+        "isotropic",
+        "plugin"
     ],
-    "homepage": "https://github.com/ibi-group/eslint-plugin-isotropic",
     "license": "BSD-3-Clause",
     "main": "lib/eslint-plugin-isotropic.js",
     "name": "eslint-plugin-isotropic",
