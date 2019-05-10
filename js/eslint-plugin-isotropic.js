@@ -3,21 +3,23 @@ import * as _eslintPluginEslintComments from 'eslint-plugin-eslint-comments';
 import _preferReflectApply from './prefer-reflect-apply.js';
 import _sortKeys from './sort-keys.js';
 import _sortVars from './sort-vars.js';
+import _topScopePrefix from './top-scope-prefix.js';
 
-const configs = {
+const _configs = {
         isotropic: {
             ..._eslintConfigIsotropic
         }
     },
-    rules = {
+    _rules = {
         ..._eslintPluginEslintComments.rules,
         'prefer-reflect-apply': _preferReflectApply,
         'sort-keys': _sortKeys,
-        'sort-vars': _sortVars
+        'sort-vars': _sortVars,
+        'top-scope-prefix': _topScopePrefix
     };
 
-configs.isotropic.rules = {
-    ...configs.isotropic.rules,
+_configs.isotropic.rules = {
+    ..._configs.isotropic.rules,
     'isotropic/disable-enable-pair': 'warn',
     'isotropic/no-aggregating-enable': 'error',
     'isotropic/no-duplicate-disable': 'error',
@@ -47,10 +49,16 @@ configs.isotropic.rules = {
             prefixPositions: {},
             strictEmptyLines: true
         }
+    ],
+    'isotropic/top-scope-prefix': [
+        'error',
+        {
+            prefix: '_'
+        }
     ]
 };
 
 export {
-    configs,
-    rules
+    _configs as configs,
+    _rules as rules
 };
