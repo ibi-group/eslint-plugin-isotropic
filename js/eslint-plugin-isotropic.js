@@ -52,7 +52,7 @@ _configs.isotropic.rules = {
     'isotropic/filenames/match-exported': 'off',
     'isotropic/filenames/match-regex': [
         'warn',
-        '^(?:[0-9a-z](?:[-.0-9a-z]*[0-9a-z])?|Configuration(?:\\.[^.]+?)*?\\.js)$',
+        '^(?:[0-9a-z](?:[-.0-9a-z]*?[0-9a-z])?)|(?:Configuration(?:\\.[0-9a-z](?:[-.0-9a-z]*?[0-9a-z])?)?)$',
         false
     ],
     'isotropic/filenames/no-index': 'warn',
@@ -131,7 +131,7 @@ _configs.isotropic.rules = {
             commonjs: true,
             esmodule: true,
             ignore: [
-                '^.*Configuration(?:\\.[^.]+?)*?\\.js$'
+                '^.*Configuration(?:\\..*?)?\\.js$'
             ]
         }
     ],
