@@ -37,6 +37,10 @@
         "eslint": "~7.5.0",
         "eslint-config-isotropic": "~0.10.0",
         "eslint-plugin-eslint-comments": "~3.2.0",
+        "eslint-plugin-filenames": "~1.3.2",
+        "eslint-plugin-import": "~2.22.0",
+        "eslint-plugin-node": "~11.1.0",
+        "eslint-plugin-promise": "~4.2.1",
         "isotropic-natural-sort": "~0.5.0"
     },
     "description": "ESLint rules for Isotropic",
