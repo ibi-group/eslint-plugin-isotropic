@@ -11,7 +11,7 @@ _mocha.describe('sortKeys', () => {
     });
 
     _mocha.it('should pass eslint tests', () => {
-        (new _eslint.RuleTester()).run('sort-keys', _sortKeys, {
+        new _eslint.RuleTester().run('sort-keys', _sortKeys, {
             invalid: [{
                 code: `
                     const object = {
@@ -28,7 +28,7 @@ _mocha.describe('sortKeys', () => {
                     type: 'Identifier'
                 }],
                 parserOptions: {
-                    ecmaVersion: 2018
+                    ecmaVersion: 2020
                 }
             }, {
                 code: `
@@ -46,7 +46,7 @@ _mocha.describe('sortKeys', () => {
                     type: 'Identifier'
                 }],
                 parserOptions: {
-                    ecmaVersion: 2018
+                    ecmaVersion: 2020
                 }
             }, {
                 code: `
@@ -67,7 +67,7 @@ _mocha.describe('sortKeys', () => {
                     direction: 'desc'
                 }],
                 parserOptions: {
-                    ecmaVersion: 2018
+                    ecmaVersion: 2020
                 }
             }, {
                 code: `
@@ -85,7 +85,7 @@ _mocha.describe('sortKeys', () => {
                     caseSensitive: true
                 }],
                 parserOptions: {
-                    ecmaVersion: 2018
+                    ecmaVersion: 2020
                 }
             }, {
                 code: `
@@ -108,7 +108,7 @@ _mocha.describe('sortKeys', () => {
                     type: 'Literal'
                 }],
                 parserOptions: {
-                    ecmaVersion: 2018
+                    ecmaVersion: 2020
                 }
             }, {
                 code: `
@@ -134,7 +134,7 @@ _mocha.describe('sortKeys', () => {
                     ignoreSpecialCharacters: false
                 }],
                 parserOptions: {
-                    ecmaVersion: 2018
+                    ecmaVersion: 2020
                 }
             }, {
                 code: `
@@ -153,7 +153,7 @@ _mocha.describe('sortKeys', () => {
                     type: 'Identifier'
                 }],
                 parserOptions: {
-                    ecmaVersion: 2018
+                    ecmaVersion: 2020
                 }
             }, {
                 code: `
@@ -172,7 +172,7 @@ _mocha.describe('sortKeys', () => {
                     type: 'Identifier'
                 }],
                 parserOptions: {
-                    ecmaVersion: 2018
+                    ecmaVersion: 2020
                 }
             }, {
                 code: `
@@ -190,7 +190,7 @@ _mocha.describe('sortKeys', () => {
                     type: 'Identifier'
                 }],
                 parserOptions: {
-                    ecmaVersion: 2018
+                    ecmaVersion: 2020
                 }
             }],
             valid: [{
@@ -202,7 +202,7 @@ _mocha.describe('sortKeys', () => {
                     };
                 `,
                 parserOptions: {
-                    ecmaVersion: 2018
+                    ecmaVersion: 2020
                 }
             }, {
                 code: `
@@ -216,7 +216,7 @@ _mocha.describe('sortKeys', () => {
                     };
                 `,
                 parserOptions: {
-                    ecmaVersion: 2018
+                    ecmaVersion: 2020
                 }
             }, {
                 code: `
@@ -230,7 +230,7 @@ _mocha.describe('sortKeys', () => {
                     direction: 'desc'
                 }],
                 parserOptions: {
-                    ecmaVersion: 2018
+                    ecmaVersion: 2020
                 }
             }, {
                 code: `
@@ -244,7 +244,7 @@ _mocha.describe('sortKeys', () => {
                     caseSensitive: true
                 }],
                 parserOptions: {
-                    ecmaVersion: 2018
+                    ecmaVersion: 2020
                 }
             }, {
                 code: `
@@ -257,7 +257,7 @@ _mocha.describe('sortKeys', () => {
                     };
                 `,
                 parserOptions: {
-                    ecmaVersion: 2018
+                    ecmaVersion: 2020
                 }
             }, {
                 code: `
@@ -273,7 +273,7 @@ _mocha.describe('sortKeys', () => {
                     ignoreSpecialCharacters: false
                 }],
                 parserOptions: {
-                    ecmaVersion: 2018
+                    ecmaVersion: 2020
                 }
             }, {
                 code: `
@@ -285,7 +285,7 @@ _mocha.describe('sortKeys', () => {
                     };
                 `,
                 parserOptions: {
-                    ecmaVersion: 2018
+                    ecmaVersion: 2020
                 }
             }, {
                 code: `
@@ -297,7 +297,7 @@ _mocha.describe('sortKeys', () => {
                     };
                 `,
                 parserOptions: {
-                    ecmaVersion: 2018
+                    ecmaVersion: 2020
                 }
             }, {
                 code: `
@@ -309,7 +309,7 @@ _mocha.describe('sortKeys', () => {
                     };
                 `,
                 parserOptions: {
-                    ecmaVersion: 2018
+                    ecmaVersion: 2020
                 }
             }, {
                 code: `
@@ -319,7 +319,7 @@ _mocha.describe('sortKeys', () => {
                     } = {};
                 `,
                 parserOptions: {
-                    ecmaVersion: 2018
+                    ecmaVersion: 2020
                 }
             }]
         });

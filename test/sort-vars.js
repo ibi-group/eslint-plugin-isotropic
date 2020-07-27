@@ -25,7 +25,7 @@ _mocha.describe('sortVars', () => {
                     type: 'Identifier'
                 }],
                 parserOptions: {
-                    ecmaVersion: 2018
+                    ecmaVersion: 2020
                 }
             }, {
                 code: `
@@ -44,7 +44,7 @@ _mocha.describe('sortVars', () => {
                     direction: 'desc'
                 }],
                 parserOptions: {
-                    ecmaVersion: 2018
+                    ecmaVersion: 2020
                 }
             }, {
                 code: `
@@ -60,7 +60,7 @@ _mocha.describe('sortVars', () => {
                     caseSensitive: true
                 }],
                 parserOptions: {
-                    ecmaVersion: 2018
+                    ecmaVersion: 2020
                 }
             }, {
                 code: `
@@ -81,7 +81,7 @@ _mocha.describe('sortVars', () => {
                     type: 'Identifier'
                 }],
                 parserOptions: {
-                    ecmaVersion: 2018
+                    ecmaVersion: 2020
                 }
             }, {
                 code: `
@@ -105,7 +105,7 @@ _mocha.describe('sortVars', () => {
                     ignoreSpecialCharacters: false
                 }],
                 parserOptions: {
-                    ecmaVersion: 2018
+                    ecmaVersion: 2020
                 }
             }, {
                 code: `
@@ -120,7 +120,7 @@ _mocha.describe('sortVars', () => {
                     type: 'Identifier'
                 }],
                 parserOptions: {
-                    ecmaVersion: 2018
+                    ecmaVersion: 2020
                 }
             }, {
                 code: `
@@ -141,7 +141,7 @@ _mocha.describe('sortVars', () => {
                     type: 'Identifier'
                 }],
                 parserOptions: {
-                    ecmaVersion: 2018
+                    ecmaVersion: 2020
                 }
             }, {
                 code: `
@@ -159,7 +159,7 @@ _mocha.describe('sortVars', () => {
                     type: 'Identifier'
                 }],
                 parserOptions: {
-                    ecmaVersion: 2018
+                    ecmaVersion: 2020
                 }
             }, {
                 code: `
@@ -180,7 +180,7 @@ _mocha.describe('sortVars', () => {
                     direction: 'desc'
                 }],
                 parserOptions: {
-                    ecmaVersion: 2018
+                    ecmaVersion: 2020
                 }
             }, {
                 code: `
@@ -198,7 +198,7 @@ _mocha.describe('sortVars', () => {
                     caseSensitive: true
                 }],
                 parserOptions: {
-                    ecmaVersion: 2018
+                    ecmaVersion: 2020
                 }
             }, {
                 code: `
@@ -221,7 +221,7 @@ _mocha.describe('sortVars', () => {
                     type: 'Literal'
                 }],
                 parserOptions: {
-                    ecmaVersion: 2018
+                    ecmaVersion: 2020
                 }
             }, {
                 code: `
@@ -247,7 +247,7 @@ _mocha.describe('sortVars', () => {
                     ignoreSpecialCharacters: false
                 }],
                 parserOptions: {
-                    ecmaVersion: 2018
+                    ecmaVersion: 2020
                 }
             }, {
                 code: `
@@ -264,7 +264,7 @@ _mocha.describe('sortVars', () => {
                     type: 'Identifier'
                 }],
                 parserOptions: {
-                    ecmaVersion: 2018
+                    ecmaVersion: 2020
                 }
             }, {
                 code: `
@@ -285,7 +285,7 @@ _mocha.describe('sortVars', () => {
                     type: 'Identifier'
                 }],
                 parserOptions: {
-                    ecmaVersion: 2018
+                    ecmaVersion: 2020
                 }
             }],
             valid = [{
@@ -295,7 +295,7 @@ _mocha.describe('sortVars', () => {
                         c = 3;
                 `,
                 parserOptions: {
-                    ecmaVersion: 2018
+                    ecmaVersion: 2020
                 }
             }, {
                 code: `
@@ -307,7 +307,7 @@ _mocha.describe('sortVars', () => {
                     direction: 'desc'
                 }],
                 parserOptions: {
-                    ecmaVersion: 2018
+                    ecmaVersion: 2020
                 }
             }, {
                 code: `
@@ -319,7 +319,7 @@ _mocha.describe('sortVars', () => {
                     caseSensitive: true
                 }],
                 parserOptions: {
-                    ecmaVersion: 2018
+                    ecmaVersion: 2020
                 }
             }, {
                 code: `
@@ -330,7 +330,7 @@ _mocha.describe('sortVars', () => {
                         aeiou_e = 5;
                 `,
                 parserOptions: {
-                    ecmaVersion: 2018
+                    ecmaVersion: 2020
                 }
             }, {
                 code: `
@@ -344,7 +344,7 @@ _mocha.describe('sortVars', () => {
                     ignoreSpecialCharacters: false
                 }],
                 parserOptions: {
-                    ecmaVersion: 2018
+                    ecmaVersion: 2020
                 }
             }, {
                 code: `
@@ -362,7 +362,7 @@ _mocha.describe('sortVars', () => {
                         ];
                 `,
                 parserOptions: {
-                    ecmaVersion: 2018
+                    ecmaVersion: 2020
                 }
             }, {
                 code: `
@@ -372,7 +372,7 @@ _mocha.describe('sortVars', () => {
                         c = 3;
                 `,
                 parserOptions: {
-                    ecmaVersion: 2018
+                    ecmaVersion: 2020
                 }
             }, {
                 code: `
@@ -387,7 +387,7 @@ _mocha.describe('sortVars', () => {
                         c = 3;
                 `,
                 parserOptions: {
-                    ecmaVersion: 2018
+                    ecmaVersion: 2020
                 }
             }, {
                 code: `
@@ -404,7 +404,7 @@ _mocha.describe('sortVars', () => {
                     strictEmptyLines: false
                 }],
                 parserOptions: {
-                    ecmaVersion: 2018
+                    ecmaVersion: 2020
                 }
             }, {
                 code: `
@@ -415,7 +415,7 @@ _mocha.describe('sortVars', () => {
                         a = 4;
                 `,
                 parserOptions: {
-                    ecmaVersion: 2018
+                    ecmaVersion: 2020
                 }
             }, {
                 code: `
@@ -430,7 +430,7 @@ _mocha.describe('sortVars', () => {
                     strictEmptyLines: false
                 }],
                 parserOptions: {
-                    ecmaVersion: 2018
+                    ecmaVersion: 2020
                 }
             }, {
                 code: `
@@ -441,7 +441,7 @@ _mocha.describe('sortVars', () => {
                     } = {};
                 `,
                 parserOptions: {
-                    ecmaVersion: 2018
+                    ecmaVersion: 2020
                 }
             }, {
                 code: `
@@ -455,7 +455,7 @@ _mocha.describe('sortVars', () => {
                     direction: 'desc'
                 }],
                 parserOptions: {
-                    ecmaVersion: 2018
+                    ecmaVersion: 2020
                 }
             }, {
                 code: `
@@ -469,7 +469,7 @@ _mocha.describe('sortVars', () => {
                     caseSensitive: true
                 }],
                 parserOptions: {
-                    ecmaVersion: 2018
+                    ecmaVersion: 2020
                 }
             }, {
                 code: `
@@ -482,7 +482,7 @@ _mocha.describe('sortVars', () => {
                     } = {};
                 `,
                 parserOptions: {
-                    ecmaVersion: 2018
+                    ecmaVersion: 2020
                 }
             }, {
                 code: `
@@ -498,7 +498,7 @@ _mocha.describe('sortVars', () => {
                     ignoreSpecialCharacters: false
                 }],
                 parserOptions: {
-                    ecmaVersion: 2018
+                    ecmaVersion: 2020
                 }
             }, {
                 code: `
@@ -510,7 +510,7 @@ _mocha.describe('sortVars', () => {
                     } = {};
                 `,
                 parserOptions: {
-                    ecmaVersion: 2018
+                    ecmaVersion: 2020
                 }
             }, {
                 code: `
@@ -522,7 +522,7 @@ _mocha.describe('sortVars', () => {
                     } = {};
                 `,
                 parserOptions: {
-                    ecmaVersion: 2018
+                    ecmaVersion: 2020
                 }
             }, {
                 code: `
@@ -541,7 +541,7 @@ _mocha.describe('sortVars', () => {
                     strictEmptyLines: false
                 }],
                 parserOptions: {
-                    ecmaVersion: 2018
+                    ecmaVersion: 2020
                 }
             }, {
                 code: `
@@ -554,7 +554,7 @@ _mocha.describe('sortVars', () => {
                     } = {};
                 `,
                 parserOptions: {
-                    ecmaVersion: 2018
+                    ecmaVersion: 2020
                 }
             }, {
                 code: `
@@ -571,7 +571,35 @@ _mocha.describe('sortVars', () => {
                     strictEmptyLines: false
                 }],
                 parserOptions: {
-                    ecmaVersion: 2018
+                    ecmaVersion: 2020
+                }
+            }, {
+                code: `
+                    const a = 1,
+                        b = () => {
+                            // empty lines in functions are okay
+
+                            return 2;
+                        },
+                        c = 3;
+                `,
+                parserOptions: {
+                    ecmaVersion: 2020
+                }
+            }, {
+                code: `
+                    const a = 1,
+                        [
+                            b
+                        ] = () => {
+                            // empty lines in functions are okay
+
+                            return 2;
+                        },
+                        c = 3;
+                `,
+                parserOptions: {
+                    ecmaVersion: 2020
                 }
             }];
 
@@ -590,7 +618,7 @@ _mocha.describe('sortVars', () => {
             code: test.code.replace('const', 'var')
         })));
 
-        (new _eslint.RuleTester()).run('sort-vars', _sortVars, {
+        new _eslint.RuleTester().run('sort-vars', _sortVars, {
             invalid,
             valid
         });
