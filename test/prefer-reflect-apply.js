@@ -11,7 +11,7 @@ _mocha.describe('preferReflectApply', () => {
     });
 
     _mocha.it('should pass eslint tests', () => {
-        (new _eslint.RuleTester()).run('prefer-reflect-apply', _preferReflectApply, {
+        new _eslint.RuleTester().run('prefer-reflect-apply', _preferReflectApply, {
             invalid: [{
                 code: `
                     someFunction.call(object, ...args);
@@ -21,7 +21,7 @@ _mocha.describe('preferReflectApply', () => {
                     type: 'CallExpression'
                 }],
                 parserOptions: {
-                    ecmaVersion: 2018
+                    ecmaVersion: 2020
                 }
             }, {
                 code: `
@@ -32,7 +32,7 @@ _mocha.describe('preferReflectApply', () => {
                     type: 'CallExpression'
                 }],
                 parserOptions: {
-                    ecmaVersion: 2018
+                    ecmaVersion: 2020
                 }
             }, {
                 code: `
@@ -43,7 +43,7 @@ _mocha.describe('preferReflectApply', () => {
                     type: 'CallExpression'
                 }],
                 parserOptions: {
-                    ecmaVersion: 2018
+                    ecmaVersion: 2020
                 }
             }],
             valid: [{
@@ -51,21 +51,21 @@ _mocha.describe('preferReflectApply', () => {
                     Reflect.apply(someFunction, args);
                 `,
                 parserOptions: {
-                    ecmaVersion: 2018
+                    ecmaVersion: 2020
                 }
             }, {
                 code: `
                     someFunction(...args);
                 `,
                 parserOptions: {
-                    ecmaVersion: 2018
+                    ecmaVersion: 2020
                 }
             }, {
                 code: `
                     someObject.someMethod(...args);
                 `,
                 parserOptions: {
-                    ecmaVersion: 2018
+                    ecmaVersion: 2020
                 }
             }]
         });

@@ -11,7 +11,7 @@ _mocha.describe('topScopePrefix', () => {
     });
 
     _mocha.it('should pass eslint tests', () => {
-        (new _eslint.RuleTester()).run('top-scope-prefix', _topScopePrefix, {
+        new _eslint.RuleTester().run('top-scope-prefix', _topScopePrefix, {
             invalid: [{
                 code: `
                     const constVariable = null;
@@ -53,7 +53,7 @@ _mocha.describe('topScopePrefix', () => {
                     type: 'Identifier'
                 }],
                 parserOptions: {
-                    ecmaVersion: 2018,
+                    ecmaVersion: 2020,
                     sourceType: 'module'
                 }
             }, {
@@ -87,7 +87,7 @@ _mocha.describe('topScopePrefix', () => {
                     type: 'Identifier'
                 }],
                 parserOptions: {
-                    ecmaVersion: 2018
+                    ecmaVersion: 2020
                 }
             }, {
                 code: `
@@ -125,7 +125,7 @@ _mocha.describe('topScopePrefix', () => {
                     type: 'Identifier'
                 }],
                 parserOptions: {
-                    ecmaVersion: 2018
+                    ecmaVersion: 2020
                 }
             }, {
                 code: `
@@ -163,7 +163,7 @@ _mocha.describe('topScopePrefix', () => {
                     type: 'Identifier'
                 }],
                 parserOptions: {
-                    ecmaVersion: 2018
+                    ecmaVersion: 2020
                 }
             }, {
                 code: `
@@ -242,7 +242,7 @@ _mocha.describe('topScopePrefix', () => {
                     prefix: 'PREFIX'
                 }],
                 parserOptions: {
-                    ecmaVersion: 2018,
+                    ecmaVersion: 2020,
                     sourceType: 'module'
                 }
             }],
@@ -262,7 +262,7 @@ _mocha.describe('topScopePrefix', () => {
                     var _varVariable;
                 `,
                 parserOptions: {
-                    ecmaVersion: 2018,
+                    ecmaVersion: 2020,
                     sourceType: 'module'
                 }
             }, {
@@ -277,7 +277,7 @@ _mocha.describe('topScopePrefix', () => {
                     var _varVariable;
                 `,
                 parserOptions: {
-                    ecmaVersion: 2018
+                    ecmaVersion: 2020
                 }
             }, {
                 code: `
@@ -293,7 +293,7 @@ _mocha.describe('topScopePrefix', () => {
                     }
                 `,
                 parserOptions: {
-                    ecmaVersion: 2018
+                    ecmaVersion: 2020
                 }
             }, {
                 code: `
@@ -309,7 +309,7 @@ _mocha.describe('topScopePrefix', () => {
                     })();
                 `,
                 parserOptions: {
-                    ecmaVersion: 2018
+                    ecmaVersion: 2020
                 }
             }, {
                 code: `
@@ -339,7 +339,7 @@ _mocha.describe('topScopePrefix', () => {
                     prefix: 'PREFIX'
                 }],
                 parserOptions: {
-                    ecmaVersion: 2018,
+                    ecmaVersion: 2020,
                     sourceType: 'module'
                 }
             }]
