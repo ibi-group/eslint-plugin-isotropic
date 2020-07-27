@@ -4,6 +4,7 @@ import * as _eslintPluginFilenames from 'eslint-plugin-filenames';
 import * as _eslintPluginImport from 'eslint-plugin-import';
 import * as _eslintPluginNode from 'eslint-plugin-node';
 import * as _eslintPluginPromise from 'eslint-plugin-promise';
+import _preferDateNow from './prefer-date-now.js';
 import _preferReflectApply from './prefer-reflect-apply.js';
 import _sortKeys from './sort-keys.js';
 import _sortVars from './sort-vars.js';
@@ -22,6 +23,7 @@ const _configs = {
         promise: _eslintPluginPromise
     },
     _rules = {
+        'prefer-date-now': _preferDateNow,
         'prefer-reflect-apply': _preferReflectApply,
         'sort-keys': _sortKeys,
         'sort-vars': _sortVars,
@@ -197,6 +199,7 @@ _configs.isotropic.rules = {
     'isotropic/node/prefer-promises/fs': 'error',
     'isotropic/node/process-exit-as-throw': 'error',
     'isotropic/node/shebang': 'off',
+    'isotropic/prefer-date-now': 'error',
     'isotropic/prefer-reflect-apply': 'error',
     'isotropic/promise/always-return': 'off',
     'isotropic/promise/avoid-new': 'off',
