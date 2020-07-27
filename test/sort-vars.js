@@ -573,6 +573,34 @@ _mocha.describe('sortVars', () => {
                 parserOptions: {
                     ecmaVersion: 2020
                 }
+            }, {
+                code: `
+                    const a = 1,
+                        b = () => {
+                            // empty lines in functions are okay
+
+                            return 2;
+                        },
+                        c = 3;
+                `,
+                parserOptions: {
+                    ecmaVersion: 2020
+                }
+            }, {
+                code: `
+                    const a = 1,
+                        [
+                            b
+                        ] = () => {
+                            // empty lines in functions are okay
+
+                            return 2;
+                        },
+                        c = 3;
+                `,
+                parserOptions: {
+                    ecmaVersion: 2020
+                }
             }];
 
         invalid.push(...invalid.map(test => ({

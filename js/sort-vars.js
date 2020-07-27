@@ -74,8 +74,14 @@ export default {
                 }, null);
             },
             VariableDeclaration (node) {
+                const ignoreLineIndexSet = new Set();
+
                 node.declarations.reduce((previousDeclaration, declaration) => {
                     if (declaration.id.type !== 'Identifier') {
+                        for (let lineIndex = declaration.loc.start.line; lineIndex < declaration.loc.end.line; lineIndex += 1) {
+                            ignoreLineIndexSet.add(lineIndex);
+                        }
+
                         return previousDeclaration;
                     }
 
@@ -83,7 +89,7 @@ export default {
                         const emptyLineIndexes = [];
 
                         for (let lineIndex = previousDeclaration.loc.end.line; lineIndex < declaration.id.loc.start.line - 1; lineIndex += 1) {
-                            if (/^\s*$/u.test(sourceCode.lines[lineIndex])) {
+                            if (!ignoreLineIndexSet.has(lineIndex) && /^\s*$/u.test(sourceCode.lines[lineIndex])) {
                                 emptyLineIndexes.push(lineIndex);
                             }
                         }
