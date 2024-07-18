@@ -3,7 +3,7 @@ import _eslint from 'eslint';
 import _mocha from 'isotropic-dev-dependencies/lib/mocha.js';
 import _topScopePrefix from '../js/top-scope-prefix.js';
 
-_mocha.describe('topScopePrefix', () => {
+_mocha.describe('top-scope-prefix', () => {
     _mocha.it('should be a rule object', () => {
         _chai.expect(_topScopePrefix).to.be.an('object');
         _chai.expect(_topScopePrefix).to.have.property('create').that.is.a('function');
@@ -52,8 +52,8 @@ _mocha.describe('topScopePrefix', () => {
                     message: 'Expected top scope variable `varVariable` to have prefix `_`.',
                     type: 'Identifier'
                 }],
-                parserOptions: {
-                    ecmaVersion: 2020,
+                languageOptions: {
+                    ecmaVersion: 2025,
                     sourceType: 'module'
                 }
             }, {
@@ -86,8 +86,43 @@ _mocha.describe('topScopePrefix', () => {
                     message: 'Expected top scope variable `varVariable` to have prefix `_`.',
                     type: 'Identifier'
                 }],
-                parserOptions: {
-                    ecmaVersion: 2020
+                languageOptions: {
+                    ecmaVersion: 2025,
+                    sourceType: 'script'
+                }
+            }, {
+                code: `
+                    const constVariable = null;
+                    const {
+                        destructureProperty,
+                        _renameDestructureProperty: renameDestructureProperty
+                    } = {};
+                    function functionVariable () {};
+                    let letVariable;
+                    var varVariable;
+                `,
+                errors: [{
+                    message: 'Expected top scope variable `constVariable` to have prefix `_`.',
+                    type: 'Identifier'
+                }, {
+                    message: 'Expected top scope variable `destructureProperty` to have prefix `_`.',
+                    type: 'Identifier'
+                }, {
+                    message: 'Expected top scope variable `renameDestructureProperty` to have prefix `_`.',
+                    type: 'Identifier'
+                }, {
+                    message: 'Expected top scope variable `functionVariable` to have prefix `_`.',
+                    type: 'Identifier'
+                }, {
+                    message: 'Expected top scope variable `letVariable` to have prefix `_`.',
+                    type: 'Identifier'
+                }, {
+                    message: 'Expected top scope variable `varVariable` to have prefix `_`.',
+                    type: 'Identifier'
+                }],
+                languageOptions: {
+                    ecmaVersion: 2025,
+                    sourceType: 'commonjs'
                 }
             }, {
                 code: `
@@ -124,8 +159,48 @@ _mocha.describe('topScopePrefix', () => {
                     message: 'Expected top scope variable `varVariable` to have prefix `_`.',
                     type: 'Identifier'
                 }],
-                parserOptions: {
-                    ecmaVersion: 2020
+                languageOptions: {
+                    ecmaVersion: 2025,
+                    sourceType: 'script'
+                }
+            }, {
+                code: `
+                    {
+                        const _constVariable = null;
+                        const {
+                            _destructureProperty,
+                            renameDestructureProperty: _renameDestructureProperty
+                        } = {};
+                        function _functionVariable (_functionArgument) {};
+                        let _letVariable;
+                        var varVariable;
+                    }
+                `,
+                errors: [{
+                    message: 'Unexpected prefix `_` on child scope variable `_constVariable`.',
+                    type: 'Identifier'
+                }, {
+                    message: 'Unexpected prefix `_` on child scope variable `_destructureProperty`.',
+                    type: 'Identifier'
+                }, {
+                    message: 'Unexpected prefix `_` on child scope variable `_renameDestructureProperty`.',
+                    type: 'Identifier'
+                }, {
+                    message: 'Unexpected prefix `_` on child scope variable `_functionVariable`.',
+                    type: 'Identifier'
+                }, {
+                    message: 'Unexpected prefix `_` on child scope variable `_functionArgument`.',
+                    type: 'Identifier'
+                }, {
+                    message: 'Unexpected prefix `_` on child scope variable `_letVariable`.',
+                    type: 'Identifier'
+                }, {
+                    message: 'Expected top scope variable `varVariable` to have prefix `_`.',
+                    type: 'Identifier'
+                }],
+                languageOptions: {
+                    ecmaVersion: 2025,
+                    sourceType: 'commonjs'
                 }
             }, {
                 code: `
@@ -162,8 +237,48 @@ _mocha.describe('topScopePrefix', () => {
                     message: 'Unexpected prefix `_` on child scope variable `_varVariable`.',
                     type: 'Identifier'
                 }],
-                parserOptions: {
-                    ecmaVersion: 2020
+                languageOptions: {
+                    ecmaVersion: 2025,
+                    sourceType: 'script'
+                }
+            }, {
+                code: `
+                    (() => {
+                        const _constVariable = null;
+                        const {
+                            _destructureProperty,
+                            renameDestructureProperty: _renameDestructureProperty
+                        } = {};
+                        function _functionVariable (_functionArgument) {};
+                        let _letVariable;
+                        var _varVariable;
+                    })();
+                `,
+                errors: [{
+                    message: 'Unexpected prefix `_` on child scope variable `_constVariable`.',
+                    type: 'Identifier'
+                }, {
+                    message: 'Unexpected prefix `_` on child scope variable `_destructureProperty`.',
+                    type: 'Identifier'
+                }, {
+                    message: 'Unexpected prefix `_` on child scope variable `_renameDestructureProperty`.',
+                    type: 'Identifier'
+                }, {
+                    message: 'Unexpected prefix `_` on child scope variable `_functionVariable`.',
+                    type: 'Identifier'
+                }, {
+                    message: 'Unexpected prefix `_` on child scope variable `_functionArgument`.',
+                    type: 'Identifier'
+                }, {
+                    message: 'Unexpected prefix `_` on child scope variable `_letVariable`.',
+                    type: 'Identifier'
+                }, {
+                    message: 'Unexpected prefix `_` on child scope variable `_varVariable`.',
+                    type: 'Identifier'
+                }],
+                languageOptions: {
+                    ecmaVersion: 2025,
+                    sourceType: 'commonjs'
                 }
             }, {
                 code: `
@@ -238,13 +353,13 @@ _mocha.describe('topScopePrefix', () => {
                     message: 'Expected top scope variable `varVariable` to have prefix `PREFIX`.',
                     type: 'Identifier'
                 }],
+                languageOptions: {
+                    ecmaVersion: 2025,
+                    sourceType: 'module'
+                },
                 options: [{
                     prefix: 'PREFIX'
-                }],
-                parserOptions: {
-                    ecmaVersion: 2020,
-                    sourceType: 'module'
-                }
+                }]
             }],
             valid: [{
                 code: `
@@ -261,8 +376,8 @@ _mocha.describe('topScopePrefix', () => {
                     } from 'module';
                     var _varVariable;
                 `,
-                parserOptions: {
-                    ecmaVersion: 2020,
+                languageOptions: {
+                    ecmaVersion: 2025,
                     sourceType: 'module'
                 }
             }, {
@@ -276,8 +391,24 @@ _mocha.describe('topScopePrefix', () => {
                     let _letVariable;
                     var _varVariable;
                 `,
-                parserOptions: {
-                    ecmaVersion: 2020
+                languageOptions: {
+                    ecmaVersion: 2025,
+                    sourceType: 'script'
+                }
+            }, {
+                code: `
+                    const _constVariable = null;
+                    const {
+                        _destructureProperty,
+                        renameDestructureProperty: _renameDestructureProperty
+                    } = {};
+                    function _functionVariable () {};
+                    let _letVariable;
+                    var _varVariable;
+                `,
+                languageOptions: {
+                    ecmaVersion: 2025,
+                    sourceType: 'commonjs'
                 }
             }, {
                 code: `
@@ -292,8 +423,26 @@ _mocha.describe('topScopePrefix', () => {
                         var _varVariable;
                     }
                 `,
-                parserOptions: {
-                    ecmaVersion: 2020
+                languageOptions: {
+                    ecmaVersion: 2025,
+                    sourceType: 'script'
+                }
+            }, {
+                code: `
+                    {
+                        const constVariable = null;
+                        const {
+                            destructureProperty,
+                            _renameDestructureProperty: renameDestructureProperty
+                        } = {};
+                        function functionVariable (functionArgument) {};
+                        let letVariable;
+                        var _varVariable;
+                    }
+                `,
+                languageOptions: {
+                    ecmaVersion: 2025,
+                    sourceType: 'commonjs'
                 }
             }, {
                 code: `
@@ -308,8 +457,26 @@ _mocha.describe('topScopePrefix', () => {
                         var varVariable;
                     })();
                 `,
-                parserOptions: {
-                    ecmaVersion: 2020
+                languageOptions: {
+                    ecmaVersion: 2025,
+                    sourceType: 'script'
+                }
+            }, {
+                code: `
+                    (() => {
+                        const constVariable = null;
+                        const {
+                            destructureProperty,
+                            _renameDestructureProperty: renameDestructureProperty
+                        } = {};
+                        function functionVariable (functionArgument) {};
+                        let letVariable;
+                        var varVariable;
+                    })();
+                `,
+                languageOptions: {
+                    ecmaVersion: 2025,
+                    sourceType: 'commonjs'
                 }
             }, {
                 code: `
@@ -335,13 +502,13 @@ _mocha.describe('topScopePrefix', () => {
                     } from 'module';
                     var PREFIXVarVariable;
                 `,
+                languageOptions: {
+                    ecmaVersion: 2025,
+                    sourceType: 'module'
+                },
                 options: [{
                     prefix: 'PREFIX'
-                }],
-                parserOptions: {
-                    ecmaVersion: 2020,
-                    sourceType: 'module'
-                }
+                }]
             }]
         });
     });

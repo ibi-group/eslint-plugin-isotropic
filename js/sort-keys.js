@@ -33,7 +33,7 @@ export default {
                                 previousPropertyName,
                                 propertyName
                             },
-                            message: 'Expected object keys to be in order. \'{{propertyName}}\' should be before \'{{previousPropertyName}}\'.',
+                            messageId: 'sortKeys',
                             node: property.key
                         });
                     }
@@ -45,11 +45,13 @@ export default {
     },
     meta: {
         docs: {
-            category: 'Stylistic Issues',
             description: 'require object keys to be sorted',
-            recommended: true
+            recommended: true,
+            url: 'https://github.com/ibi-group/eslint-plugin-isotropic/blob/master/docs/rules/sort-keys.md'
         },
-        fixable: null,
+        messages: {
+            sortKeys: 'Expected object keys to be in order. \'{{propertyName}}\' should be before \'{{previousPropertyName}}\'.'
+        },
         schema: [{
             additionalProperties: false,
             properties: {
@@ -71,6 +73,7 @@ export default {
                 }
             },
             type: 'object'
-        }]
+        }],
+        type: 'suggestion'
     }
 };

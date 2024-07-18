@@ -3,7 +3,7 @@ import _eslint from 'eslint';
 import _mocha from 'isotropic-dev-dependencies/lib/mocha.js';
 import _preferReflectApply from '../js/prefer-reflect-apply.js';
 
-_mocha.describe('preferReflectApply', () => {
+_mocha.describe('prefer-reflect-apply', () => {
     _mocha.it('should be a rule object', () => {
         _chai.expect(_preferReflectApply).to.be.an('object');
         _chai.expect(_preferReflectApply).to.have.property('create').that.is.a('function');
@@ -20,8 +20,8 @@ _mocha.describe('preferReflectApply', () => {
                     message: 'Avoid using Function.prototype.call, instead use Reflect.apply.',
                     type: 'CallExpression'
                 }],
-                parserOptions: {
-                    ecmaVersion: 2020
+                languageOptions: {
+                    ecmaVersion: 2025
                 }
             }, {
                 code: `
@@ -31,8 +31,8 @@ _mocha.describe('preferReflectApply', () => {
                     message: 'Avoid using Function.prototype.apply, instead use Reflect.apply.',
                     type: 'CallExpression'
                 }],
-                parserOptions: {
-                    ecmaVersion: 2020
+                languageOptions: {
+                    ecmaVersion: 2025
                 }
             }, {
                 code: `
@@ -42,30 +42,30 @@ _mocha.describe('preferReflectApply', () => {
                     message: 'Avoid using Function.prototype.call, instead use Reflect.apply.',
                     type: 'CallExpression'
                 }],
-                parserOptions: {
-                    ecmaVersion: 2020
+                languageOptions: {
+                    ecmaVersion: 2025
                 }
             }],
             valid: [{
                 code: `
                     Reflect.apply(someFunction, args);
                 `,
-                parserOptions: {
-                    ecmaVersion: 2020
+                languageOptions: {
+                    ecmaVersion: 2025
                 }
             }, {
                 code: `
                     someFunction(...args);
                 `,
-                parserOptions: {
-                    ecmaVersion: 2020
+                languageOptions: {
+                    ecmaVersion: 2025
                 }
             }, {
                 code: `
                     someObject.someMethod(...args);
                 `,
-                parserOptions: {
-                    ecmaVersion: 2020
+                languageOptions: {
+                    ecmaVersion: 2025
                 }
             }]
         });

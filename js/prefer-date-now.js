@@ -17,7 +17,7 @@ export default {
                 node.callee.property.name === 'getTime'
             ) {
                 context.report({
-                    message: 'Avoid using new Date().getTime(), instead use Date.now().',
+                    messageId: 'preferDateNow',
                     node
                 });
             }
@@ -25,11 +25,14 @@ export default {
     }),
     meta: {
         docs: {
-            category: 'ECMAScript 6',
             description: 'require `Date.now`',
-            recommended: true
+            recommended: true,
+            url: 'https://github.com/ibi-group/eslint-plugin-isotropic/blob/master/docs/rules/prefer-date-now.md'
         },
-        fixable: null,
-        schema: []
+        messages: {
+            preferDateNow: 'Avoid using new Date().getTime(), instead use Date.now().'
+        },
+        schema: [],
+        type: 'suggestion'
     }
 };
