@@ -32,7 +32,7 @@ export default {
                             previousPropertyName = _getPropertyName(previousProperty);
 
                         for (let lineIndex = previousProperty.loc.end.line; lineIndex < property.key.loc.start.line - 1; lineIndex += 1) {
-                            if (/^\s*$/u.test(sourceCode.lines[lineIndex])) {
+                            if (/^\s*$/v.test(sourceCode.lines[lineIndex])) {
                                 emptyLineIndexes.push(lineIndex);
                             }
                         }
@@ -44,7 +44,7 @@ export default {
                                         previousPropertyName,
                                         propertyName
                                     },
-                                    message: 'Expected properties to be in order. \'{{propertyName}}\' should be before \'{{previousPropertyName}}\'.',
+                                    messageId: 'sortProps',
                                     node: property.key
                                 });
                             }
@@ -64,7 +64,7 @@ export default {
                                         line: emptyLineIndexes[0] + 1
                                     }
                                 },
-                                message: 'Unexpected empty line between \'{{previousPropertyName}}\' and \'{{propertyName}}\'.',
+                                messageId: 'unexpectedEmptyLineBetweenProperties',
                                 node: property.key
                             });
                         }
@@ -89,7 +89,7 @@ export default {
                         const emptyLineIndexes = [];
 
                         for (let lineIndex = previousDeclaration.loc.end.line; lineIndex < declaration.id.loc.start.line - 1; lineIndex += 1) {
-                            if (!ignoreLineIndexSet.has(lineIndex) && /^\s*$/u.test(sourceCode.lines[lineIndex])) {
+                            if (!ignoreLineIndexSet.has(lineIndex) && /^\s*$/v.test(sourceCode.lines[lineIndex])) {
                                 emptyLineIndexes.push(lineIndex);
                             }
                         }
@@ -101,7 +101,7 @@ export default {
                                         identifierName: declaration.id.name,
                                         previousIdentifierName: previousDeclaration.id.name
                                     },
-                                    message: 'Expected variables to be in order. \'{{identifierName}}\' should be before \'{{previousIdentifierName}}\'.',
+                                    messageId: 'sortVars',
                                     node: declaration.id
                                 });
                             }
@@ -121,7 +121,7 @@ export default {
                                         line: emptyLineIndexes[0] + 1
                                     }
                                 },
-                                message: 'Unexpected empty line between \'{{previousIdentifierName}}\' and \'{{identifierName}}\'.',
+                                messageId: 'unexpectedEmptyLineBetweenIdentifiers',
                                 node: declaration.id
                             });
                         }
@@ -134,11 +134,16 @@ export default {
     },
     meta: {
         docs: {
-            category: 'Stylistic Issues',
             description: 'require variable declarations to be sorted',
-            recommended: true
+            recommended: true,
+            url: 'https://github.com/ibi-group/eslint-plugin-isotropic/blob/master/docs/rules/sort-vars.md'
         },
-        fixable: null,
+        messages: {
+            sortProps: 'Expected properties to be in order. \'{{propertyName}}\' should be before \'{{previousPropertyName}}\'.',
+            sortVars: 'Expected variables to be in order. \'{{identifierName}}\' should be before \'{{previousIdentifierName}}\'.',
+            unexpectedEmptyLineBetweenIdentifiers: 'Unexpected empty line between \'{{previousIdentifierName}}\' and \'{{identifierName}}\'.',
+            unexpectedEmptyLineBetweenProperties: 'Unexpected empty line between \'{{previousPropertyName}}\' and \'{{propertyName}}\'.'
+        },
         schema: [{
             additionalProperties: false,
             properties: {
@@ -163,6 +168,7 @@ export default {
                 }
             },
             type: 'object'
-        }]
+        }],
+        type: 'suggestion'
     }
 };

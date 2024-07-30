@@ -1,44 +1,53 @@
+const _getIsTopScope = (scope, sourceType) => {
+    switch (scope.type) {
+        case 'function':
+            if (sourceType === 'commonjs' && scope.upper?.type === 'global') {
+                return true;
+            }
+
+            break;
+        case 'global':
+        case 'module':
+            return true;
+    }
+
+    return false;
+};
+
 export default {
     create: context => {
         const [{
                 prefix = '_'
             } = {}] = context.options,
+
             checkScope = scope => {
+                const isTopScope = _getIsTopScope(scope, context.languageOptions.sourceType);
+
                 for (const variable of scope.variables) {
-                    const hasPrefix = variable.name.startsWith(prefix);
-
-                    switch (scope.type) {
-                        case 'global':
-                        case 'module':
-                            if (!hasPrefix) {
-                                variable.identifiers.forEach(identifier => {
-                                    context.report({
-                                        data: {
-                                            prefix,
-                                            variableName: variable.name
-                                        },
-                                        message: 'Expected top scope variable `{{variableName}}` to have prefix `{{prefix}}`.',
-                                        node: identifier
-                                    });
+                    if (variable.name.startsWith(prefix)) {
+                        if (!isTopScope) {
+                            variable.identifiers.forEach(identifier => {
+                                context.report({
+                                    data: {
+                                        prefix,
+                                        variableName: variable.name
+                                    },
+                                    messageId: 'unexpectedChildScopePrefix',
+                                    node: identifier
                                 });
-                            }
-
-                            break;
-                        default:
-                            if (hasPrefix) {
-                                variable.identifiers.forEach(identifier => {
-                                    context.report({
-                                        data: {
-                                            prefix,
-                                            variableName: variable.name
-                                        },
-                                        message: 'Unexpected prefix `{{prefix}}` on child scope variable `{{variableName}}`.',
-                                        node: identifier
-                                    });
-                                });
-                            }
-
-                            break;
+                            });
+                        }
+                    } else if (isTopScope) {
+                        variable.identifiers.forEach(identifier => {
+                            context.report({
+                                data: {
+                                    prefix,
+                                    variableName: variable.name
+                                },
+                                messageId: 'topScopePrefix',
+                                node: identifier
+                            });
+                        });
                     }
                 }
 
@@ -48,18 +57,21 @@ export default {
             };
 
         return {
-            'Program:exit' () {
-                checkScope(context.getScope());
+            'Program:exit' (node) {
+                checkScope(context.sourceCode.getScope(node));
             }
         };
     },
     meta: {
         docs: {
-            category: 'Stylistic Issues',
             description: 'require prefixed variables in top scope',
-            recommended: true
+            recommended: true,
+            url: 'https://github.com/ibi-group/eslint-plugin-isotropic/blob/master/docs/rules/top-scope-prefix.md'
         },
-        fixable: null,
+        messages: {
+            topScopePrefix: 'Expected top scope variable `{{variableName}}` to have prefix `{{prefix}}`.',
+            unexpectedChildScopePrefix: 'Unexpected prefix `{{prefix}}` on child scope variable `{{variableName}}`.'
+        },
         schema: [{
             additionalProperties: false,
             properties: {
@@ -68,6 +80,7 @@ export default {
                 }
             },
             type: 'object'
-        }]
+        }],
+        type: 'suggestion'
     }
 };

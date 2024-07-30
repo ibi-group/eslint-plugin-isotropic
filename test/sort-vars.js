@@ -3,7 +3,7 @@ import _eslint from 'eslint';
 import _mocha from 'isotropic-dev-dependencies/lib/mocha.js';
 import _sortVars from '../js/sort-vars.js';
 
-_mocha.describe('sortVars', () => {
+_mocha.describe('sort-vars', () => {
     _mocha.it('should be a rule object', () => {
         _chai.expect(_sortVars).to.be.an('object');
         _chai.expect(_sortVars).to.have.property('create').that.is.a('function');
@@ -24,8 +24,8 @@ _mocha.describe('sortVars', () => {
                     message: 'Expected variables to be in order. \'a\' should be before \'b\'.',
                     type: 'Identifier'
                 }],
-                parserOptions: {
-                    ecmaVersion: 2020
+                languageOptions: {
+                    ecmaVersion: 2025
                 }
             }, {
                 code: `
@@ -40,12 +40,12 @@ _mocha.describe('sortVars', () => {
                     message: 'Expected variables to be in order. \'c\' should be before \'b\'.',
                     type: 'Identifier'
                 }],
+                languageOptions: {
+                    ecmaVersion: 2025
+                },
                 options: [{
                     direction: 'desc'
-                }],
-                parserOptions: {
-                    ecmaVersion: 2020
-                }
+                }]
             }, {
                 code: `
                     const a = 2,
@@ -56,12 +56,12 @@ _mocha.describe('sortVars', () => {
                     message: 'Expected variables to be in order. \'B\' should be before \'a\'.',
                     type: 'Identifier'
                 }],
+                languageOptions: {
+                    ecmaVersion: 2025
+                },
                 options: [{
                     caseSensitive: true
-                }],
-                parserOptions: {
-                    ecmaVersion: 2020
-                }
+                }]
             }, {
                 code: `
                     const aeiou_e = 1,
@@ -80,8 +80,8 @@ _mocha.describe('sortVars', () => {
                     message: 'Expected variables to be in order. \'áeiou_a\' should be before \'aęiou_b\'.',
                     type: 'Identifier'
                 }],
-                parserOptions: {
-                    ecmaVersion: 2020
+                languageOptions: {
+                    ecmaVersion: 2025
                 }
             }, {
                 code: `
@@ -101,12 +101,12 @@ _mocha.describe('sortVars', () => {
                     message: 'Expected variables to be in order. \'aeiou_e\' should be before \'aeioǜ_d\'.',
                     type: 'Identifier'
                 }],
+                languageOptions: {
+                    ecmaVersion: 2025
+                },
                 options: [{
                     ignoreSpecialCharacters: false
-                }],
-                parserOptions: {
-                    ecmaVersion: 2020
-                }
+                }]
             }, {
                 code: `
                     const x = 1,
@@ -119,8 +119,8 @@ _mocha.describe('sortVars', () => {
                     message: 'Expected variables to be in order. \'a\' should be before \'z\'.',
                     type: 'Identifier'
                 }],
-                parserOptions: {
-                    ecmaVersion: 2020
+                languageOptions: {
+                    ecmaVersion: 2025
                 }
             }, {
                 code: `
@@ -140,8 +140,8 @@ _mocha.describe('sortVars', () => {
                     message: 'Unexpected empty line between \'b\' and \'c\'.',
                     type: 'Identifier'
                 }],
-                parserOptions: {
-                    ecmaVersion: 2020
+                languageOptions: {
+                    ecmaVersion: 2025
                 }
             }, {
                 code: `
@@ -158,8 +158,8 @@ _mocha.describe('sortVars', () => {
                     message: 'Expected properties to be in order. \'a\' should be before \'b\'.',
                     type: 'Identifier'
                 }],
-                parserOptions: {
-                    ecmaVersion: 2020
+                languageOptions: {
+                    ecmaVersion: 2025
                 }
             }, {
                 code: `
@@ -176,12 +176,12 @@ _mocha.describe('sortVars', () => {
                     message: 'Expected properties to be in order. \'c\' should be before \'b\'.',
                     type: 'Identifier'
                 }],
+                languageOptions: {
+                    ecmaVersion: 2025
+                },
                 options: [{
                     direction: 'desc'
-                }],
-                parserOptions: {
-                    ecmaVersion: 2020
-                }
+                }]
             }, {
                 code: `
                     const {
@@ -194,12 +194,12 @@ _mocha.describe('sortVars', () => {
                     message: 'Expected properties to be in order. \'B\' should be before \'a\'.',
                     type: 'Identifier'
                 }],
+                languageOptions: {
+                    ecmaVersion: 2025
+                },
                 options: [{
                     caseSensitive: true
-                }],
-                parserOptions: {
-                    ecmaVersion: 2020
-                }
+                }]
             }, {
                 code: `
                     const {
@@ -220,8 +220,8 @@ _mocha.describe('sortVars', () => {
                     message: 'Expected properties to be in order. \'áeiou_a\' should be before \'aęiou_b\'.',
                     type: 'Literal'
                 }],
-                parserOptions: {
-                    ecmaVersion: 2020
+                languageOptions: {
+                    ecmaVersion: 2025
                 }
             }, {
                 code: `
@@ -243,12 +243,12 @@ _mocha.describe('sortVars', () => {
                     message: 'Expected properties to be in order. \'aeiou_e\' should be before \'aeioǜ_d\'.',
                     type: 'Literal'
                 }],
+                languageOptions: {
+                    ecmaVersion: 2025
+                },
                 options: [{
                     ignoreSpecialCharacters: false
-                }],
-                parserOptions: {
-                    ecmaVersion: 2020
-                }
+                }]
             }, {
                 code: `
                     const {
@@ -263,8 +263,8 @@ _mocha.describe('sortVars', () => {
                     message: 'Expected properties to be in order. \'a\' should be before \'z\'.',
                     type: 'Identifier'
                 }],
-                parserOptions: {
-                    ecmaVersion: 2020
+                languageOptions: {
+                    ecmaVersion: 2025
                 }
             }, {
                 code: `
@@ -284,8 +284,8 @@ _mocha.describe('sortVars', () => {
                     message: 'Unexpected empty line between \'b\' and \'c\'.',
                     type: 'Identifier'
                 }],
-                parserOptions: {
-                    ecmaVersion: 2020
+                languageOptions: {
+                    ecmaVersion: 2025
                 }
             }],
             valid = [{
@@ -294,8 +294,8 @@ _mocha.describe('sortVars', () => {
                         b = 2,
                         c = 3;
                 `,
-                parserOptions: {
-                    ecmaVersion: 2020
+                languageOptions: {
+                    ecmaVersion: 2025
                 }
             }, {
                 code: `
@@ -303,24 +303,24 @@ _mocha.describe('sortVars', () => {
                         b = 2,
                         a = 3;
                 `,
+                languageOptions: {
+                    ecmaVersion: 2025
+                },
                 options: [{
                     direction: 'desc'
-                }],
-                parserOptions: {
-                    ecmaVersion: 2020
-                }
+                }]
             }, {
                 code: `
                     const B = 1,
                         a = 2,
                         c = 3;
                 `,
+                languageOptions: {
+                    ecmaVersion: 2025
+                },
                 options: [{
                     caseSensitive: true
-                }],
-                parserOptions: {
-                    ecmaVersion: 2020
-                }
+                }]
             }, {
                 code: `
                     const áeiou_a = 1,
@@ -329,8 +329,8 @@ _mocha.describe('sortVars', () => {
                         aeioǜ_d = 4,
                         aeiou_e = 5;
                 `,
-                parserOptions: {
-                    ecmaVersion: 2020
+                languageOptions: {
+                    ecmaVersion: 2025
                 }
             }, {
                 code: `
@@ -340,12 +340,12 @@ _mocha.describe('sortVars', () => {
                         áeiou_a = 4,
                         æiou_c = 5;
                 `,
+                languageOptions: {
+                    ecmaVersion: 2025
+                },
                 options: [{
                     ignoreSpecialCharacters: false
-                }],
-                parserOptions: {
-                    ecmaVersion: 2020
-                }
+                }]
             }, {
                 code: `
                     const x = 1,
@@ -361,8 +361,8 @@ _mocha.describe('sortVars', () => {
                             6
                         ];
                 `,
-                parserOptions: {
-                    ecmaVersion: 2020
+                languageOptions: {
+                    ecmaVersion: 2025
                 }
             }, {
                 code: `
@@ -371,8 +371,8 @@ _mocha.describe('sortVars', () => {
                         // comments are okay
                         c = 3;
                 `,
-                parserOptions: {
-                    ecmaVersion: 2020
+                languageOptions: {
+                    ecmaVersion: 2025
                 }
             }, {
                 code: `
@@ -386,8 +386,8 @@ _mocha.describe('sortVars', () => {
                         ],
                         c = 3;
                 `,
-                parserOptions: {
-                    ecmaVersion: 2020
+                languageOptions: {
+                    ecmaVersion: 2025
                 }
             }, {
                 code: `
@@ -400,12 +400,12 @@ _mocha.describe('sortVars', () => {
 
                         c = 3;
                 `,
+                languageOptions: {
+                    ecmaVersion: 2025
+                },
                 options: [{
                     strictEmptyLines: false
-                }],
-                parserOptions: {
-                    ecmaVersion: 2020
-                }
+                }]
             }, {
                 code: `
                     const x = 1,
@@ -414,8 +414,8 @@ _mocha.describe('sortVars', () => {
 
                         a = 4;
                 `,
-                parserOptions: {
-                    ecmaVersion: 2020
+                languageOptions: {
+                    ecmaVersion: 2025
                 }
             }, {
                 code: `
@@ -426,12 +426,12 @@ _mocha.describe('sortVars', () => {
 
                         a = 4;
                 `,
+                languageOptions: {
+                    ecmaVersion: 2025
+                },
                 options: [{
                     strictEmptyLines: false
-                }],
-                parserOptions: {
-                    ecmaVersion: 2020
-                }
+                }]
             }, {
                 code: `
                     const {
@@ -440,8 +440,8 @@ _mocha.describe('sortVars', () => {
                         c
                     } = {};
                 `,
-                parserOptions: {
-                    ecmaVersion: 2020
+                languageOptions: {
+                    ecmaVersion: 2025
                 }
             }, {
                 code: `
@@ -451,12 +451,12 @@ _mocha.describe('sortVars', () => {
                         a
                     } = {};
                 `,
+                languageOptions: {
+                    ecmaVersion: 2025
+                },
                 options: [{
                     direction: 'desc'
-                }],
-                parserOptions: {
-                    ecmaVersion: 2020
-                }
+                }]
             }, {
                 code: `
                     const {
@@ -465,12 +465,12 @@ _mocha.describe('sortVars', () => {
                         c
                     } = {};
                 `,
+                languageOptions: {
+                    ecmaVersion: 2025
+                },
                 options: [{
                     caseSensitive: true
-                }],
-                parserOptions: {
-                    ecmaVersion: 2020
-                }
+                }]
             }, {
                 code: `
                     const {
@@ -481,8 +481,8 @@ _mocha.describe('sortVars', () => {
                         'aeiou_e': e
                     } = {};
                 `,
-                parserOptions: {
-                    ecmaVersion: 2020
+                languageOptions: {
+                    ecmaVersion: 2025
                 }
             }, {
                 code: `
@@ -494,12 +494,12 @@ _mocha.describe('sortVars', () => {
                         'æiou_c': c
                     } = {};
                 `,
+                languageOptions: {
+                    ecmaVersion: 2025
+                },
                 options: [{
                     ignoreSpecialCharacters: false
-                }],
-                parserOptions: {
-                    ecmaVersion: 2020
-                }
+                }]
             }, {
                 code: `
                     const {
@@ -509,8 +509,8 @@ _mocha.describe('sortVars', () => {
                         c
                     } = {};
                 `,
-                parserOptions: {
-                    ecmaVersion: 2020
+                languageOptions: {
+                    ecmaVersion: 2025
                 }
             }, {
                 code: `
@@ -521,8 +521,8 @@ _mocha.describe('sortVars', () => {
                         [\`c\`]: c
                     } = {};
                 `,
-                parserOptions: {
-                    ecmaVersion: 2020
+                languageOptions: {
+                    ecmaVersion: 2025
                 }
             }, {
                 code: `
@@ -537,12 +537,12 @@ _mocha.describe('sortVars', () => {
                         c
                     } = {};
                 `,
+                languageOptions: {
+                    ecmaVersion: 2025
+                },
                 options: [{
                     strictEmptyLines: false
-                }],
-                parserOptions: {
-                    ecmaVersion: 2020
-                }
+                }]
             }, {
                 code: `
                     const {
@@ -553,8 +553,8 @@ _mocha.describe('sortVars', () => {
                         a
                     } = {};
                 `,
-                parserOptions: {
-                    ecmaVersion: 2020
+                languageOptions: {
+                    ecmaVersion: 2025
                 }
             }, {
                 code: `
@@ -567,12 +567,12 @@ _mocha.describe('sortVars', () => {
                         a
                     } = {};
                 `,
+                languageOptions: {
+                    ecmaVersion: 2025
+                },
                 options: [{
                     strictEmptyLines: false
-                }],
-                parserOptions: {
-                    ecmaVersion: 2020
-                }
+                }]
             }, {
                 code: `
                     const a = 1,
@@ -583,8 +583,8 @@ _mocha.describe('sortVars', () => {
                         },
                         c = 3;
                 `,
-                parserOptions: {
-                    ecmaVersion: 2020
+                languageOptions: {
+                    ecmaVersion: 2025
                 }
             }, {
                 code: `
@@ -598,8 +598,8 @@ _mocha.describe('sortVars', () => {
                         },
                         c = 3;
                 `,
-                parserOptions: {
-                    ecmaVersion: 2020
+                languageOptions: {
+                    ecmaVersion: 2025
                 }
             }];
 

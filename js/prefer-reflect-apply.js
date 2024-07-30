@@ -20,7 +20,7 @@ export default {
                             data: {
                                 propertyName
                             },
-                            message: 'Avoid using Function.prototype.{{propertyName}}, instead use Reflect.apply.',
+                            messageId: 'preferReflectApply',
                             node
                         });
                     }
@@ -29,11 +29,14 @@ export default {
     }),
     meta: {
         docs: {
-            category: 'ECMAScript 6',
             description: 'require `Reflect.apply`',
-            recommended: true
+            recommended: true,
+            url: 'https://github.com/ibi-group/eslint-plugin-isotropic/blob/master/docs/rules/prefer-reflect-apply.md'
         },
-        fixable: null,
-        schema: []
+        messages: {
+            preferReflectApply: 'Avoid using Function.prototype.{{propertyName}}, instead use Reflect.apply.'
+        },
+        schema: [],
+        type: 'problem'
     }
 };

@@ -20,4 +20,4 @@ const date = new Date(),
 ```
 
 ## When Not To Use It
-Don't use this rule if you want to new Date().getTime().
+Don't use this rule if you want to use new Date().getTime().
