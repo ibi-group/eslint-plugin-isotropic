@@ -1,9 +1,9 @@
 import _chai from 'isotropic-dev-dependencies/lib/chai.js';
-import _eslintPluginIsotropic from '../js/eslint-plugin-isotropic.js';
-import _mocha from 'isotropic-dev-dependencies/lib/mocha.js';
+import _eslintPluginIsotropic from '../lib/eslint-plugin-isotropic.js';
+import _test from 'node:test';
 
-_mocha.describe('eslint-plugin-isotropic', () => {
-    _mocha.it('should be an eslint plugin object', () => {
+_test.describe('eslint-plugin-isotropic', () => {
+    _test.it('should be an eslint plugin object', () => {
         _chai.expect(_eslintPluginIsotropic).to.be.an('object');
         _chai.expect(_eslintPluginIsotropic).to.have.property('configs').that.is.an('object');
         _chai.expect(_eslintPluginIsotropic.configs).to.have.property('isotropic').that.is.an('object');

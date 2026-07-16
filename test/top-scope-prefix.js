@@ -1,16 +1,16 @@
 import _chai from 'isotropic-dev-dependencies/lib/chai.js';
 import _eslint from 'eslint';
-import _mocha from 'isotropic-dev-dependencies/lib/mocha.js';
-import _topScopePrefix from '../js/top-scope-prefix.js';
+import _test from 'node:test';
+import _topScopePrefix from '../lib/top-scope-prefix.js';
 
-_mocha.describe('top-scope-prefix', () => {
-    _mocha.it('should be a rule object', () => {
+_test.describe('top-scope-prefix', () => {
+    _test.it('should be a rule object', () => {
         _chai.expect(_topScopePrefix).to.be.an('object');
         _chai.expect(_topScopePrefix).to.have.property('create').that.is.a('function');
         _chai.expect(_topScopePrefix).to.have.property('meta').that.is.an('object');
     });
 
-    _mocha.it('should pass eslint tests', () => {
+    _test.it('should pass eslint tests', () => {
         new _eslint.RuleTester().run('top-scope-prefix', _topScopePrefix, {
             invalid: [{
                 code: `
@@ -28,32 +28,24 @@ _mocha.describe('top-scope-prefix', () => {
                     var varVariable;
                 `,
                 errors: [{
-                    message: 'Expected top scope variable `constVariable` to have prefix `_`.',
-                    type: 'Identifier'
+                    message: 'Expected top scope variable `constVariable` to have prefix `_`.'
                 }, {
-                    message: 'Expected top scope variable `destructureProperty` to have prefix `_`.',
-                    type: 'Identifier'
+                    message: 'Expected top scope variable `destructureProperty` to have prefix `_`.'
                 }, {
-                    message: 'Expected top scope variable `renameDestructureProperty` to have prefix `_`.',
-                    type: 'Identifier'
+                    message: 'Expected top scope variable `renameDestructureProperty` to have prefix `_`.'
                 }, {
-                    message: 'Expected top scope variable `functionVariable` to have prefix `_`.',
-                    type: 'Identifier'
+                    message: 'Expected top scope variable `functionVariable` to have prefix `_`.'
                 }, {
-                    message: 'Expected top scope variable `importVariable` to have prefix `_`.',
-                    type: 'Identifier'
+                    message: 'Expected top scope variable `importVariable` to have prefix `_`.'
                 }, {
-                    message: 'Expected top scope variable `letVariable` to have prefix `_`.',
-                    type: 'Identifier'
+                    message: 'Expected top scope variable `letVariable` to have prefix `_`.'
                 }, {
-                    message: 'Expected top scope variable `renameImportVariable` to have prefix `_`.',
-                    type: 'Identifier'
+                    message: 'Expected top scope variable `renameImportVariable` to have prefix `_`.'
                 }, {
-                    message: 'Expected top scope variable `varVariable` to have prefix `_`.',
-                    type: 'Identifier'
+                    message: 'Expected top scope variable `varVariable` to have prefix `_`.'
                 }],
                 languageOptions: {
-                    ecmaVersion: 2025,
+                    ecmaVersion: 2026,
                     sourceType: 'module'
                 }
             }, {
@@ -68,26 +60,20 @@ _mocha.describe('top-scope-prefix', () => {
                     var varVariable;
                 `,
                 errors: [{
-                    message: 'Expected top scope variable `constVariable` to have prefix `_`.',
-                    type: 'Identifier'
+                    message: 'Expected top scope variable `constVariable` to have prefix `_`.'
                 }, {
-                    message: 'Expected top scope variable `destructureProperty` to have prefix `_`.',
-                    type: 'Identifier'
+                    message: 'Expected top scope variable `destructureProperty` to have prefix `_`.'
                 }, {
-                    message: 'Expected top scope variable `renameDestructureProperty` to have prefix `_`.',
-                    type: 'Identifier'
+                    message: 'Expected top scope variable `renameDestructureProperty` to have prefix `_`.'
                 }, {
-                    message: 'Expected top scope variable `functionVariable` to have prefix `_`.',
-                    type: 'Identifier'
+                    message: 'Expected top scope variable `functionVariable` to have prefix `_`.'
                 }, {
-                    message: 'Expected top scope variable `letVariable` to have prefix `_`.',
-                    type: 'Identifier'
+                    message: 'Expected top scope variable `letVariable` to have prefix `_`.'
                 }, {
-                    message: 'Expected top scope variable `varVariable` to have prefix `_`.',
-                    type: 'Identifier'
+                    message: 'Expected top scope variable `varVariable` to have prefix `_`.'
                 }],
                 languageOptions: {
-                    ecmaVersion: 2025,
+                    ecmaVersion: 2026,
                     sourceType: 'script'
                 }
             }, {
@@ -102,26 +88,20 @@ _mocha.describe('top-scope-prefix', () => {
                     var varVariable;
                 `,
                 errors: [{
-                    message: 'Expected top scope variable `constVariable` to have prefix `_`.',
-                    type: 'Identifier'
+                    message: 'Expected top scope variable `constVariable` to have prefix `_`.'
                 }, {
-                    message: 'Expected top scope variable `destructureProperty` to have prefix `_`.',
-                    type: 'Identifier'
+                    message: 'Expected top scope variable `destructureProperty` to have prefix `_`.'
                 }, {
-                    message: 'Expected top scope variable `renameDestructureProperty` to have prefix `_`.',
-                    type: 'Identifier'
+                    message: 'Expected top scope variable `renameDestructureProperty` to have prefix `_`.'
                 }, {
-                    message: 'Expected top scope variable `functionVariable` to have prefix `_`.',
-                    type: 'Identifier'
+                    message: 'Expected top scope variable `functionVariable` to have prefix `_`.'
                 }, {
-                    message: 'Expected top scope variable `letVariable` to have prefix `_`.',
-                    type: 'Identifier'
+                    message: 'Expected top scope variable `letVariable` to have prefix `_`.'
                 }, {
-                    message: 'Expected top scope variable `varVariable` to have prefix `_`.',
-                    type: 'Identifier'
+                    message: 'Expected top scope variable `varVariable` to have prefix `_`.'
                 }],
                 languageOptions: {
-                    ecmaVersion: 2025,
+                    ecmaVersion: 2026,
                     sourceType: 'commonjs'
                 }
             }, {
@@ -138,29 +118,22 @@ _mocha.describe('top-scope-prefix', () => {
                     }
                 `,
                 errors: [{
-                    message: 'Unexpected prefix `_` on child scope variable `_constVariable`.',
-                    type: 'Identifier'
+                    message: 'Unexpected prefix `_` on child scope variable `_constVariable`.'
                 }, {
-                    message: 'Unexpected prefix `_` on child scope variable `_destructureProperty`.',
-                    type: 'Identifier'
+                    message: 'Unexpected prefix `_` on child scope variable `_destructureProperty`.'
                 }, {
-                    message: 'Unexpected prefix `_` on child scope variable `_renameDestructureProperty`.',
-                    type: 'Identifier'
+                    message: 'Unexpected prefix `_` on child scope variable `_renameDestructureProperty`.'
                 }, {
-                    message: 'Unexpected prefix `_` on child scope variable `_functionVariable`.',
-                    type: 'Identifier'
+                    message: 'Unexpected prefix `_` on child scope variable `_functionVariable`.'
                 }, {
-                    message: 'Unexpected prefix `_` on child scope variable `_functionArgument`.',
-                    type: 'Identifier'
+                    message: 'Unexpected prefix `_` on child scope variable `_functionArgument`.'
                 }, {
-                    message: 'Unexpected prefix `_` on child scope variable `_letVariable`.',
-                    type: 'Identifier'
+                    message: 'Unexpected prefix `_` on child scope variable `_letVariable`.'
                 }, {
-                    message: 'Expected top scope variable `varVariable` to have prefix `_`.',
-                    type: 'Identifier'
+                    message: 'Expected top scope variable `varVariable` to have prefix `_`.'
                 }],
                 languageOptions: {
-                    ecmaVersion: 2025,
+                    ecmaVersion: 2026,
                     sourceType: 'script'
                 }
             }, {
@@ -177,29 +150,22 @@ _mocha.describe('top-scope-prefix', () => {
                     }
                 `,
                 errors: [{
-                    message: 'Unexpected prefix `_` on child scope variable `_constVariable`.',
-                    type: 'Identifier'
+                    message: 'Unexpected prefix `_` on child scope variable `_constVariable`.'
                 }, {
-                    message: 'Unexpected prefix `_` on child scope variable `_destructureProperty`.',
-                    type: 'Identifier'
+                    message: 'Unexpected prefix `_` on child scope variable `_destructureProperty`.'
                 }, {
-                    message: 'Unexpected prefix `_` on child scope variable `_renameDestructureProperty`.',
-                    type: 'Identifier'
+                    message: 'Unexpected prefix `_` on child scope variable `_renameDestructureProperty`.'
                 }, {
-                    message: 'Unexpected prefix `_` on child scope variable `_functionVariable`.',
-                    type: 'Identifier'
+                    message: 'Unexpected prefix `_` on child scope variable `_functionVariable`.'
                 }, {
-                    message: 'Unexpected prefix `_` on child scope variable `_functionArgument`.',
-                    type: 'Identifier'
+                    message: 'Unexpected prefix `_` on child scope variable `_functionArgument`.'
                 }, {
-                    message: 'Unexpected prefix `_` on child scope variable `_letVariable`.',
-                    type: 'Identifier'
+                    message: 'Unexpected prefix `_` on child scope variable `_letVariable`.'
                 }, {
-                    message: 'Expected top scope variable `varVariable` to have prefix `_`.',
-                    type: 'Identifier'
+                    message: 'Expected top scope variable `varVariable` to have prefix `_`.'
                 }],
                 languageOptions: {
-                    ecmaVersion: 2025,
+                    ecmaVersion: 2026,
                     sourceType: 'commonjs'
                 }
             }, {
@@ -216,29 +182,22 @@ _mocha.describe('top-scope-prefix', () => {
                     })();
                 `,
                 errors: [{
-                    message: 'Unexpected prefix `_` on child scope variable `_constVariable`.',
-                    type: 'Identifier'
+                    message: 'Unexpected prefix `_` on child scope variable `_constVariable`.'
                 }, {
-                    message: 'Unexpected prefix `_` on child scope variable `_destructureProperty`.',
-                    type: 'Identifier'
+                    message: 'Unexpected prefix `_` on child scope variable `_destructureProperty`.'
                 }, {
-                    message: 'Unexpected prefix `_` on child scope variable `_renameDestructureProperty`.',
-                    type: 'Identifier'
+                    message: 'Unexpected prefix `_` on child scope variable `_renameDestructureProperty`.'
                 }, {
-                    message: 'Unexpected prefix `_` on child scope variable `_functionVariable`.',
-                    type: 'Identifier'
+                    message: 'Unexpected prefix `_` on child scope variable `_functionVariable`.'
                 }, {
-                    message: 'Unexpected prefix `_` on child scope variable `_functionArgument`.',
-                    type: 'Identifier'
+                    message: 'Unexpected prefix `_` on child scope variable `_functionArgument`.'
                 }, {
-                    message: 'Unexpected prefix `_` on child scope variable `_letVariable`.',
-                    type: 'Identifier'
+                    message: 'Unexpected prefix `_` on child scope variable `_letVariable`.'
                 }, {
-                    message: 'Unexpected prefix `_` on child scope variable `_varVariable`.',
-                    type: 'Identifier'
+                    message: 'Unexpected prefix `_` on child scope variable `_varVariable`.'
                 }],
                 languageOptions: {
-                    ecmaVersion: 2025,
+                    ecmaVersion: 2026,
                     sourceType: 'script'
                 }
             }, {
@@ -255,29 +214,22 @@ _mocha.describe('top-scope-prefix', () => {
                     })();
                 `,
                 errors: [{
-                    message: 'Unexpected prefix `_` on child scope variable `_constVariable`.',
-                    type: 'Identifier'
+                    message: 'Unexpected prefix `_` on child scope variable `_constVariable`.'
                 }, {
-                    message: 'Unexpected prefix `_` on child scope variable `_destructureProperty`.',
-                    type: 'Identifier'
+                    message: 'Unexpected prefix `_` on child scope variable `_destructureProperty`.'
                 }, {
-                    message: 'Unexpected prefix `_` on child scope variable `_renameDestructureProperty`.',
-                    type: 'Identifier'
+                    message: 'Unexpected prefix `_` on child scope variable `_renameDestructureProperty`.'
                 }, {
-                    message: 'Unexpected prefix `_` on child scope variable `_functionVariable`.',
-                    type: 'Identifier'
+                    message: 'Unexpected prefix `_` on child scope variable `_functionVariable`.'
                 }, {
-                    message: 'Unexpected prefix `_` on child scope variable `_functionArgument`.',
-                    type: 'Identifier'
+                    message: 'Unexpected prefix `_` on child scope variable `_functionArgument`.'
                 }, {
-                    message: 'Unexpected prefix `_` on child scope variable `_letVariable`.',
-                    type: 'Identifier'
+                    message: 'Unexpected prefix `_` on child scope variable `_letVariable`.'
                 }, {
-                    message: 'Unexpected prefix `_` on child scope variable `_varVariable`.',
-                    type: 'Identifier'
+                    message: 'Unexpected prefix `_` on child scope variable `_varVariable`.'
                 }],
                 languageOptions: {
-                    ecmaVersion: 2025,
+                    ecmaVersion: 2026,
                     sourceType: 'commonjs'
                 }
             }, {
@@ -305,56 +257,40 @@ _mocha.describe('top-scope-prefix', () => {
                     var varVariable;
                 `,
                 errors: [{
-                    message: 'Expected top scope variable `constVariable` to have prefix `PREFIX`.',
-                    type: 'Identifier'
+                    message: 'Expected top scope variable `constVariable` to have prefix `PREFIX`.'
                 }, {
-                    message: 'Expected top scope variable `destructureProperty` to have prefix `PREFIX`.',
-                    type: 'Identifier'
+                    message: 'Expected top scope variable `destructureProperty` to have prefix `PREFIX`.'
                 }, {
-                    message: 'Expected top scope variable `renameDestructureProperty` to have prefix `PREFIX`.',
-                    type: 'Identifier'
+                    message: 'Expected top scope variable `renameDestructureProperty` to have prefix `PREFIX`.'
                 }, {
-                    message: 'Expected top scope variable `functionVariable` to have prefix `PREFIX`.',
-                    type: 'Identifier'
+                    message: 'Expected top scope variable `functionVariable` to have prefix `PREFIX`.'
                 }, {
-                    message: 'Unexpected prefix `PREFIX` on child scope variable `PREFIXFunctionArgument`.',
-                    type: 'Identifier'
+                    message: 'Unexpected prefix `PREFIX` on child scope variable `PREFIXFunctionArgument`.'
                 }, {
-                    message: 'Unexpected prefix `PREFIX` on child scope variable `PREFIXFunctionConstVariable`.',
-                    type: 'Identifier'
+                    message: 'Unexpected prefix `PREFIX` on child scope variable `PREFIXFunctionConstVariable`.'
                 }, {
-                    message: 'Unexpected prefix `PREFIX` on child scope variable `PREFIXFunctionDestructureProperty`.',
-                    type: 'Identifier'
+                    message: 'Unexpected prefix `PREFIX` on child scope variable `PREFIXFunctionDestructureProperty`.'
                 }, {
-                    message: 'Unexpected prefix `PREFIX` on child scope variable `PREFIXFunctionRenameDestructureProperty`.',
-                    type: 'Identifier'
+                    message: 'Unexpected prefix `PREFIX` on child scope variable `PREFIXFunctionRenameDestructureProperty`.'
                 }, {
-                    message: 'Unexpected prefix `PREFIX` on child scope variable `PREFIXFunctionFunctionVariable`.',
-                    type: 'Identifier'
+                    message: 'Unexpected prefix `PREFIX` on child scope variable `PREFIXFunctionFunctionVariable`.'
                 }, {
-                    message: 'Unexpected prefix `PREFIX` on child scope variable `PREFIXFunctionFunctionArgument`.',
-                    type: 'Identifier'
+                    message: 'Unexpected prefix `PREFIX` on child scope variable `PREFIXFunctionFunctionArgument`.'
                 }, {
-                    message: 'Unexpected prefix `PREFIX` on child scope variable `PREFIXFunctionLetVariable`.',
-                    type: 'Identifier'
+                    message: 'Unexpected prefix `PREFIX` on child scope variable `PREFIXFunctionLetVariable`.'
                 }, {
-                    message: 'Unexpected prefix `PREFIX` on child scope variable `PREFIXFunctionVarVariable`.',
-                    type: 'Identifier'
+                    message: 'Unexpected prefix `PREFIX` on child scope variable `PREFIXFunctionVarVariable`.'
                 }, {
-                    message: 'Expected top scope variable `importVariable` to have prefix `PREFIX`.',
-                    type: 'Identifier'
+                    message: 'Expected top scope variable `importVariable` to have prefix `PREFIX`.'
                 }, {
-                    message: 'Expected top scope variable `letVariable` to have prefix `PREFIX`.',
-                    type: 'Identifier'
+                    message: 'Expected top scope variable `letVariable` to have prefix `PREFIX`.'
                 }, {
-                    message: 'Expected top scope variable `renameImportVariable` to have prefix `PREFIX`.',
-                    type: 'Identifier'
+                    message: 'Expected top scope variable `renameImportVariable` to have prefix `PREFIX`.'
                 }, {
-                    message: 'Expected top scope variable `varVariable` to have prefix `PREFIX`.',
-                    type: 'Identifier'
+                    message: 'Expected top scope variable `varVariable` to have prefix `PREFIX`.'
                 }],
                 languageOptions: {
-                    ecmaVersion: 2025,
+                    ecmaVersion: 2026,
                     sourceType: 'module'
                 },
                 options: [{
@@ -377,7 +313,7 @@ _mocha.describe('top-scope-prefix', () => {
                     var _varVariable;
                 `,
                 languageOptions: {
-                    ecmaVersion: 2025,
+                    ecmaVersion: 2026,
                     sourceType: 'module'
                 }
             }, {
@@ -392,7 +328,7 @@ _mocha.describe('top-scope-prefix', () => {
                     var _varVariable;
                 `,
                 languageOptions: {
-                    ecmaVersion: 2025,
+                    ecmaVersion: 2026,
                     sourceType: 'script'
                 }
             }, {
@@ -407,7 +343,7 @@ _mocha.describe('top-scope-prefix', () => {
                     var _varVariable;
                 `,
                 languageOptions: {
-                    ecmaVersion: 2025,
+                    ecmaVersion: 2026,
                     sourceType: 'commonjs'
                 }
             }, {
@@ -424,7 +360,7 @@ _mocha.describe('top-scope-prefix', () => {
                     }
                 `,
                 languageOptions: {
-                    ecmaVersion: 2025,
+                    ecmaVersion: 2026,
                     sourceType: 'script'
                 }
             }, {
@@ -441,7 +377,7 @@ _mocha.describe('top-scope-prefix', () => {
                     }
                 `,
                 languageOptions: {
-                    ecmaVersion: 2025,
+                    ecmaVersion: 2026,
                     sourceType: 'commonjs'
                 }
             }, {
@@ -458,7 +394,7 @@ _mocha.describe('top-scope-prefix', () => {
                     })();
                 `,
                 languageOptions: {
-                    ecmaVersion: 2025,
+                    ecmaVersion: 2026,
                     sourceType: 'script'
                 }
             }, {
@@ -475,7 +411,7 @@ _mocha.describe('top-scope-prefix', () => {
                     })();
                 `,
                 languageOptions: {
-                    ecmaVersion: 2025,
+                    ecmaVersion: 2026,
                     sourceType: 'commonjs'
                 }
             }, {
@@ -503,7 +439,7 @@ _mocha.describe('top-scope-prefix', () => {
                     var PREFIXVarVariable;
                 `,
                 languageOptions: {
-                    ecmaVersion: 2025,
+                    ecmaVersion: 2026,
                     sourceType: 'module'
                 },
                 options: [{
