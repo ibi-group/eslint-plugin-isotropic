@@ -14,6 +14,9 @@ export default [
             'eslint-plugin/no-deprecated-context-methods': 'error',
             'eslint-plugin/no-deprecated-report-api': 'error',
             'eslint-plugin/no-identical-tests': 'error',
+            'eslint-plugin/no-matching-violation-suggest-message-ids': 'error',
+            'eslint-plugin/no-meta-replaced-by': 'error',
+            'eslint-plugin/no-meta-schema-default': 'error',
             'eslint-plugin/no-missing-message-ids': 'error',
             'eslint-plugin/no-missing-placeholders': 'error',
             'eslint-plugin/no-only-tests': 'error',
@@ -27,18 +30,28 @@ export default [
             'eslint-plugin/prefer-placeholders': 'error',
             'eslint-plugin/prefer-replace-text': 'error',
             'eslint-plugin/report-message-format': 'off',
+            'eslint-plugin/require-meta-default-options': 'error',
             'eslint-plugin/require-meta-docs-description': 'error',
             'eslint-plugin/require-meta-docs-recommended': 'error',
             'eslint-plugin/require-meta-docs-url': 'error',
             'eslint-plugin/require-meta-fixable': 'error',
             'eslint-plugin/require-meta-has-suggestions': 'error',
             'eslint-plugin/require-meta-schema': 'error',
+            'eslint-plugin/require-meta-schema-description': 'error',
             'eslint-plugin/require-meta-type': 'error',
+            'eslint-plugin/require-test-case-name': [
+                'off',
+                {
+                    require: 'always'
+                }
+            ],
+            'eslint-plugin/require-test-error-positions': 'off',
             'eslint-plugin/test-case-property-ordering': 'off',
             'eslint-plugin/test-case-shorthand-strings': [
                 'error',
                 'never'
-            ]
+            ],
+            'eslint-plugin/unique-test-case-names': 'error'
         }
     }
 ];

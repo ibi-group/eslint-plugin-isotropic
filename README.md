@@ -9,7 +9,7 @@ ESLint rules for Isotropic projects with sensible defaults and consistent conven
 
 ## Installation
 
-You'll need [ESLint](https://eslint.org/) v9.8.0 or above:
+You'll need [ESLint](https://eslint.org/) v10.5.0 or above:
 
 ```sh
 npm install eslint --save-dev
@@ -58,7 +58,6 @@ export default defineConfig([
             isotropic: _eslintPluginIsotropic
         },
         rules: {
-            'isotropic/prefer-date-now': 'error',
             'isotropic/prefer-reflect-apply': 'error'
             // Add other rules as needed
         }
@@ -80,9 +79,56 @@ This plugin provides a comprehensive set of rules and configurations:
 - Provides sensible defaults for all ESLint core rules
 - Adds several custom rules for Isotropic projects
 
-> **Note**: ESLint v9.x uses the new "flat config" format (`eslint.config.js`) instead of the deprecated `.eslintrc.*` configuration files. For more information, see the [ESLint Configuration Files Documentation](https://eslint.org/docs/latest/use/configure/configuration-files).
+> **Note**: ESLint v10.x uses the "flat config" format (`eslint.config.js`). For more information, see the [ESLint Configuration Files Documentation](https://eslint.org/docs/latest/use/configure/configuration-files).
 
 ## Custom Rules
+
+### `array-literal-newline`
+
+Enforces consistent line breaks in array literals, and is automatically fixable with the `--fix` option. An empty array stays collapsed (`[]`); when every element is itself an array or object literal the elements "hug" the brackets, separated only by a comma and a space; and when any element is not an array or object literal, every element is placed on its own line.
+
+This rule covers array literals only. Object literal formatting (each property on its own line, empty objects collapsed) is already handled by the `object-curly-newline`, `object-property-newline`, and `object-curly-spacing` rules, which the isotropic config enables. The behavior here cannot be reproduced with the `@stylistic` array rules, because they cannot express the "hugging" exception for arrays whose elements are all literals.
+
+```js
+// ✅ Every element is a literal, so they hug the brackets
+const a = [{
+    a: 'a'
+}, {
+    b: 'b'
+}];
+
+// ✅ An element is not a literal, so every element is on its own line
+const b = [
+    {
+        a: 'a'
+    },
+    someVariable
+];
+
+// ✅ Empty literals stay collapsed
+const c = [{}, [], {}, []];
+```
+
+Configuration example:
+```js
+// eslint.config.js
+import { defineConfig } from "eslint/config";
+import _eslintPluginIsotropic from 'eslint-plugin-isotropic';
+
+export default defineConfig([
+    {
+        files: ["**/*.js"],
+        plugins: {
+            isotropic: _eslintPluginIsotropic
+        },
+        rules: {
+            'isotropic/array-literal-newline': 'error'
+        }
+    }
+]);
+```
+
+See [documentation](https://github.com/ibi-group/eslint-plugin-isotropic/blob/master/docs/rules/array-literal-newline.md) for more details.
 
 ### `filename-must-match-pattern`
 
@@ -138,23 +184,68 @@ export default defineConfig([
 
 See [documentation](https://github.com/ibi-group/eslint-plugin-isotropic/blob/master/docs/rules/filename-must-not-match-pattern.md) for more details.
 
-### `prefer-date-now`
+### `logger-error-property`
 
-Enforces using `Date.now()` instead of `new Date().getTime()` for better readability and performance.
+Requires errors to be logged as the `error` property of the metadata object when using `isotropic-logger`, so that the logger's error serializer is applied. Only modules that import both `isotropic-logger` and `isotropic-error` are checked.
+
+```js
+import _Error from 'isotropic-error';
+import _logger from 'isotropic-logger';
+
+// ❌ Incorrect
+_logger.error(_Error({
+    message: 'An error occurred'
+}), 'An error occurred');
+
+// ✅ Correct
+_logger.error({
+    error: _Error({
+        message: 'An error occurred'
+    })
+}, 'An error occurred');
+```
+
+See [documentation](https://github.com/ibi-group/eslint-plugin-isotropic/blob/master/docs/rules/logger-error-property.md) for more details.
+
+### `no-unnecessary-return-await`
+
+Disallows `return await` (and the equivalent arrow body `async () => await x`) when the `await` is unnecessary, that is, when it is not inside a `try` block or a `catch` block of a `try` that has a `finally`. This rule is automatically fixable with the `--fix` option.
 
 ```js
 // ❌ Incorrect
-const now = new Date().getTime();
+const f = async () => {
+    return await getValue();
+};
 
 // ✅ Correct
-const now = Date.now();
+const f = async () => {
+    return getValue();
+};
 ```
 
-See [documentation](https://github.com/ibi-group/eslint-plugin-isotropic/blob/master/docs/rules/prefer-date-now.md) for more details.
+See [documentation](https://github.com/ibi-group/eslint-plugin-isotropic/blob/master/docs/rules/no-unnecessary-return-await.md) for more details.
+
+### `no-unnecessary-variable`
+
+Disallows a `const` whose value is read exactly once when inlining it cannot change behavior (a literal or no-substitution template initializer, or a variable returned in the immediately following statement). Module-scoped constants, `let`/`var`, and destructuring are exempt.
+
+```js
+// ❌ Incorrect
+const getTwelve = () => {
+    const twelve = 12;
+
+    return twelve;
+};
+
+// ✅ Correct
+const getTwelve = () => 12;
+```
+
+See [documentation](https://github.com/ibi-group/eslint-plugin-isotropic/blob/master/docs/rules/no-unnecessary-variable.md) for more details.
 
 ### `prefer-reflect-apply`
 
-Encourages using `Reflect.apply()` over `Function.prototype.apply()` and `Function.prototype.call()`.
+Encourages using `Reflect.apply()` over `Function.prototype.apply()` and `Function.prototype.call()`. This rule is automatically fixable with the `--fix` option.
 
 ```js
 // ❌ Incorrect
@@ -350,7 +441,7 @@ The plugin encourages a clear module structure with:
 The plugin encourages use of modern JavaScript features:
 
 - ES modules over CommonJS
-- Modern APIs like `Reflect.apply()` and `Date.now()`
+- Modern APIs like `Reflect.apply()` and `Temporal` (the `Date` global is disallowed in favor of `Temporal`)
 - Consistent use of ES6+ features
 
 ## Combining with Other Configurations
@@ -377,4 +468,4 @@ export default [
 
 ## Compatible ESLint Versions
 
-This plugin requires ESLint 9.8.0 or later and uses ESLint's new flat config system.
+This plugin requires ESLint 10.5.0 or later and uses ESLint's flat config system.
