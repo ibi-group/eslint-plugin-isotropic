@@ -374,6 +374,161 @@ _test.describe('no-unnecessary-variable', () => {
                 languageOptions: {
                     ecmaVersion: 2026
                 }
+            }, {
+                code: `
+                    const f = () => {
+                        const value = new Date(1734567890123);
+
+                        return value;
+                    };
+                `,
+                errors: [{
+                    messageId: 'unnecessaryVariable'
+                }],
+                languageOptions: {
+                    ecmaVersion: 2026
+                }
+            }, {
+                code: `
+                    const f = () => {
+                        const value = new Set();
+
+                        return value;
+                    };
+                `,
+                errors: [{
+                    messageId: 'unnecessaryVariable'
+                }],
+                languageOptions: {
+                    ecmaVersion: 2026
+                }
+            }, {
+                code: `
+                    const f = () => {
+                        const value = new namespace.Thing();
+
+                        return value;
+                    };
+                `,
+                errors: [{
+                    messageId: 'unnecessaryVariable'
+                }],
+                languageOptions: {
+                    ecmaVersion: 2026
+                }
+            }, {
+                code: `
+                    const f = () => {
+                        const value = performance.mark('start');
+
+                        return value;
+                    };
+                `,
+                errors: [{
+                    messageId: 'unnecessaryVariable'
+                }],
+                languageOptions: {
+                    ecmaVersion: 2026
+                }
+            }, {
+                code: `
+                    const f = () => {
+                        const value = source['key'];
+
+                        return value;
+                    };
+                `,
+                errors: [{
+                    messageId: 'unnecessaryVariable'
+                }],
+                languageOptions: {
+                    ecmaVersion: 2026
+                }
+            }, {
+                code: `
+                    import _logger from 'isotropic-logger';
+
+                    const f = () => {
+                        const task = otherLogger.task('Calculating');
+
+                        return task;
+                    };
+                `,
+                errors: [{
+                    messageId: 'unnecessaryVariable'
+                }],
+                languageOptions: {
+                    ecmaVersion: 2026,
+                    sourceType: 'module'
+                }
+            }, {
+                code: `
+                    import _logger from 'isotropic-logger';
+
+                    const f = () => {
+                        const result = _logger.child();
+
+                        return result;
+                    };
+                `,
+                errors: [{
+                    messageId: 'unnecessaryVariable'
+                }],
+                languageOptions: {
+                    ecmaVersion: 2026,
+                    sourceType: 'module'
+                }
+            }, {
+                code: `
+                    import _other from 'other-module';
+
+                    const f = () => {
+                        const value = computeValue();
+
+                        return value;
+                    };
+                `,
+                errors: [{
+                    messageId: 'unnecessaryVariable'
+                }],
+                languageOptions: {
+                    ecmaVersion: 2026,
+                    sourceType: 'module'
+                }
+            }, {
+                code: `
+                    import _logger from 'isotropic-logger';
+
+                    const f = () => {
+                        const value = computeValue();
+
+                        return value;
+                    };
+                `,
+                errors: [{
+                    messageId: 'unnecessaryVariable'
+                }],
+                languageOptions: {
+                    ecmaVersion: 2026,
+                    sourceType: 'module'
+                }
+            }, {
+                code: `
+                    import _process from 'node:process';
+
+                    const f = () => {
+                        const value = _process.cwd();
+
+                        return value;
+                    };
+                `,
+                errors: [{
+                    messageId: 'unnecessaryVariable'
+                }],
+                languageOptions: {
+                    ecmaVersion: 2026,
+                    sourceType: 'module'
+                }
             }],
             valid: [{
                 code: `
@@ -670,7 +825,29 @@ _test.describe('no-unnecessary-variable', () => {
             }, {
                 code: `
                     const fn = () => {
+                        const value = new Date();
+
+                        return value;
+                    };
+                `,
+                languageOptions: {
+                    ecmaVersion: 2026
+                }
+            }, {
+                code: `
+                    const fn = () => {
                         const value = Date.now();
+
+                        return value;
+                    };
+                `,
+                languageOptions: {
+                    ecmaVersion: 2026
+                }
+            }, {
+                code: `
+                    const fn = () => {
+                        const value = performance.now();
 
                         return value;
                     };
@@ -688,6 +865,90 @@ _test.describe('no-unnecessary-variable', () => {
                 `,
                 languageOptions: {
                     ecmaVersion: 2026
+                }
+            }, {
+                code: `
+                    import _logger from 'isotropic-logger';
+
+                    const f = () => {
+                        const task = _logger.task('Calculating');
+
+                        task.complete();
+                    };
+                `,
+                languageOptions: {
+                    ecmaVersion: 2026,
+                    sourceType: 'module'
+                }
+            }, {
+                code: `
+                    import _logger from 'isotropic-logger';
+
+                    const f = () => {
+                        const task = _logger.task('Calculating');
+
+                        return task;
+                    };
+                `,
+                languageOptions: {
+                    ecmaVersion: 2026,
+                    sourceType: 'module'
+                }
+            }, {
+                code: `
+                    import _process from 'process';
+
+                    const f = () => {
+                        const value = _process.hrtime.bigint();
+
+                        return value;
+                    };
+                `,
+                languageOptions: {
+                    ecmaVersion: 2026,
+                    sourceType: 'module'
+                }
+            }, {
+                code: `
+                    import _process from 'process';
+
+                    const f = () => {
+                        const value = _process.uptime();
+
+                        return value;
+                    };
+                `,
+                languageOptions: {
+                    ecmaVersion: 2026,
+                    sourceType: 'module'
+                }
+            }, {
+                code: `
+                    import _process from 'node:process';
+
+                    const f = () => {
+                        const value = _process.hrtime.bigint();
+
+                        return value;
+                    };
+                `,
+                languageOptions: {
+                    ecmaVersion: 2026,
+                    sourceType: 'module'
+                }
+            }, {
+                code: `
+                    import _process from 'node:process';
+
+                    const f = () => {
+                        const value = _process.uptime();
+
+                        return value;
+                    };
+                `,
+                languageOptions: {
+                    ecmaVersion: 2026,
+                    sourceType: 'module'
                 }
             }]
         });

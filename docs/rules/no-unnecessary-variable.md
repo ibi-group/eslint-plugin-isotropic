@@ -69,18 +69,61 @@ because in each case the value it holds is not simply an inlinable duplicate:
   };
   ```
 
-- **The variable captures the current time.** The value references `Date.now` or
-`Temporal.Now`. The initialization of the variable is necessary regardless of
-the number of times it is referenced later.
-```js
-const measureDuration = async () => {
-    const beginTime = Temporal.Now.instant().epochMilliseconds;
+- **The variable captures the current time.** The initializer reads the current
+  time through `new Date()`, `Date.now`, `performance.now()`,
+  `process.hrtime.bigint()`, `process.uptime()`, or `Temporal.Now`. Moving that
+  expression down to the point of use would capture a *different* moment, so the
+  variable is necessary regardless of how many times it is referenced later.
 
-    await someTask();
+  ```js
+  const measureDuration = async () => {
+      const beginTime = Temporal.Now.instant().epochMilliseconds;
 
-    return Temporal.Now.instant().epochMilliseconds - beginTime;
-};
-```
+      await someTask();
+
+      return Temporal.Now.instant().epochMilliseconds - beginTime;
+  };
+  ```
+
+  Note that `process` is recognized only through the default import of `process` or
+  `node:process`. Variables will still be reported when using the global `process`.
+
+- **The variable captures an `isotropic-logger` task.** A logger's `task` method
+  records the current time when it is called so that the matching `task.complete()`
+  can report an accurate duration. For the same reason as the current-time captures
+  above, moving the `task` call would change the recorded start time, so a task
+  variable is not reported.
+
+  ```js
+  import _logger from 'isotropic-logger';
+
+  const calculate = () => {
+      const task = _logger.task('Calculating');
+
+      // perform calculation
+
+      task.complete();
+  };
+  ```
+
+  Note that the logger is recognized only through the default import of
+  `isotropic-logger`. Tasks obtained less directly may not be recognized, such as
+  from a child logger, from a logger held in an object property, or a logger
+  received as a function argument, and the task variable will be reported. Such
+  cases can be silenced with a disable comment:
+
+  ```js
+  import _logger from 'isotropic-logger';
+
+  const calculate = childLogger => {
+      // eslint-disable-next-line isotropic/no-unnecessary-variable -- Capturing a task
+      const task = childLogger.task('Calculating');
+
+      // perform calculation
+
+      task.complete();
+  };
+  ```
 
 ### Values that change before they are used
 Inlining a variable moves its initializer expression down to the point of use.
@@ -255,18 +298,37 @@ const i = () => {
 };
 
 // Capturing the current time is not considered.
+// (given `import _process from 'node:process';`)
 const j = () => {
-    const dateNow = Date.now(),
+    const dateNew = new Date(),
+        dateNow = Date.now(),
+        performanceNow = performance.now(),
+        processHrtime = _process.hrtime.bigint(),
+        processUptime = _process.uptime(),
         temporalNow = Temporal.Now.instant();
 
     return [
+        dateNew,
         dateNow,
+        performanceNow,
+        processHrtime,
+        processUptime,
         temporalNow
     ];
 };
 
+// Capturing an isotropic-logger task is not considered
+// (given `import _logger from 'isotropic-logger';`)
+const k = () => {
+    const task = _logger.task('Doing great things');
+
+    doGreatThings();
+
+    task.complete();
+};
+
 // Single use inside a loop.
-const k = values => {
+const l = values => {
     const limit = computeLimit();
 
     for (const value of values) {
@@ -277,14 +339,14 @@ const k = values => {
 };
 
 // Single use inside a nested function.
-const l = () => {
+const m = () => {
     const handler = createHandler();
 
     return event => handler.run(event);
 };
 
 // The value read is changed before it is used.
-const m = stack => {
+const n = stack => {
     const top = stack[stack.length - 1];
 
     stack.pop();
