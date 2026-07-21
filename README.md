@@ -227,7 +227,7 @@ See [documentation](https://github.com/ibi-group/eslint-plugin-isotropic/blob/ma
 
 ### `no-unnecessary-variable`
 
-Disallows a `const` whose value is read exactly once when inlining it cannot change behavior (a literal or no-substitution template initializer, or a variable returned in the immediately following statement). Module-scoped constants, `let`/`var`, and destructuring are exempt.
+Disallows a `const` whose value is read exactly once when inlining it cannot change behavior. Module-scoped constants, `let`/`var`, destructuring, values that mutate, and values that capture the current time are exempt.
 
 ```js
 // ❌ Incorrect
