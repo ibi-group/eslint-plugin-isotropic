@@ -11,12 +11,12 @@
         "eslint-plugin-regexp": "~3.2.0",
         "fs-extra": "~11.4.0",
         "globals": "~17.11.0",
-        "isotropic-natural-sort": "~0.9.0"
+        "isotropic-natural-sort": "~0.9.1"
     },
     "description": "ESLint rules for Isotropic",
     "devDependencies": {
         "eslint-plugin-eslint-plugin": "~7.6.2",
-        "isotropic-dev-dependencies": "~0.4.0"
+        "isotropic-dev-dependencies": "~0.5.0"
     },
     "engines": {
         "node": "^26.7.0",
@@ -50,5 +50,5 @@
         "test": "c8 -c ./node_modules/isotropic-dev-dependencies/config/c8.json node --test"
     },
     "type": "module",
-    "version": "0.9.1"
+    "version": "0.10.0"
 }
