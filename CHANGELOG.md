@@ -1,4 +1,27 @@
-# Changelog
+# eslint-plugin-isotropic Changelog
+
+## 0.10.0 - 2026-08-23
+
+### Changed
+
+**Two rules added to the shared config.** `isotropic/node/prefer-import/assert-strict` is enabled as an error and `isotropic/node/prefer-process-get-builtin-module` is explicitly disabled. Both come from `eslint-plugin-n` 18.3.0. The first will report new errors in code that imports `node:assert` rather than `node:assert/strict`.
+
+**`fetch` was added to the restricted globals list.** Isotropic now prefers using the `isotropic-request` package instead of using fetch directly.
+
+**The `no-unused-vars` rule no longer warns for disposables.** The configuration includes `ignoreUsingDeclarations: true`. The disposal at the end of the block is the usage.
+
+- Every custom rule now declares `meta.languages`. All nine rules advertise `js/js`, which ESLint uses to decide whether a rule applies to a given language. Rule behavior is unchanged. This is metadata that ESLint 10 expects and that tooling can read.
+- Two rule option schemas now state an explicit `additionalProperties` policy. The `prefixPositions` option of `isotropic/sort-keys` and `isotropic/sort-vars` is a free-form map of prefixes to sort positions, and its schema now says so explicitly with `additionalProperties: true`. This documents intent for schema readers and satisfies the `eslint-plugin/no-incomplete-meta-schema` rule. Because JSON Schema already permits additional properties by default, no configuration that worked before behaves differently now.
+- `eslint` bumped to `~10.9.0`, `eslint-plugin-n` to `~18.3.0`, `eslint-plugin-regexp` to `~3.2.0`, `fs-extra` to `~11.4.0`, and `globals` to `~17.11.0`.
+- Recommends `node ^26.7.0` / `npm ^11.19.0`.
+- `repository` now uses npm's preferred object form with explicit `type` and `url` properties rather than the `github:` shorthand. This is package metadata only.
+
+### Internal
+
+- The plugin's own lint configuration enables `eslint-plugin/no-incomplete-meta-schema`, `eslint-plugin/no-incorrect-meta-schema`, and `eslint-plugin/require-meta-languages`, which is what surfaced the metadata gaps above.
+- `eslint-plugin-eslint-plugin` bumped to `~7.6.2`.
+
+No runtime behavior changed in this release.
 
 ## 0.9.1 - 2026-07-21
 
